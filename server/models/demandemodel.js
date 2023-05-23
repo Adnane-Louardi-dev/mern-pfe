@@ -17,7 +17,7 @@ const demande= new mongoose.Schema({
   statut: {
     type: String,
     required: true,
-    enum: ['En attente', 'Approuvée', 'Rejetée']
+    enum: ['En_attente','En_attente_commision ','En_attente_inpection', 'Approuvée', 'Rejetée','inspecte']
   },
   entreprise: {
     type: mongoose.Schema.Types.ObjectId,
@@ -26,7 +26,14 @@ const demande= new mongoose.Schema({
   affecter:{
     type : string,
     default:'null'
+  } ,dateComm: {
+    type: Date,
+    default:'null'
+  },dateInsp: {
+    type: Date,
+    default:'null'
   }
+
 });
 
 // Création du modèle de demande d'autorisation à partir du schéma
