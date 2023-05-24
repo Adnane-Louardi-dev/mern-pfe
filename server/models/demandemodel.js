@@ -9,9 +9,9 @@ const demande= new mongoose.Schema({
   description: {
     type: String,
     required: true
-  },
+  },                          
   dateDepot: {
-    type: Date,
+    type: Date, 
     required: true
   },
   statut: {
