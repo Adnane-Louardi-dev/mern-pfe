@@ -24,7 +24,7 @@ const demande= new mongoose.Schema({
     ref: 'Entreprise'
   },
   affecter:{
-    type : string,
+    type : String,
     default:'null'
   } ,dateComm: {
     type: Date,
