@@ -1,19 +1,22 @@
-const express=require('express')
-const router=express.Router()
-router.get("/",(req,res)=>{
-    res.json({data:" ministere route"})
-})
+const express = require('express');
+const ministereController = require('../controllers/ministre');
 
-//GET all Demandes
-router.get('/', getDemandes)
+const router = express.Router();
 
-//GET a Demande
-router.get('/:id', getDemande)
+
+// Route pour la saisie des remarques par produit
+router.post('/saisie-remarque-produit', ministereController.saisieRemarqueProduit);
+
+// Route pour la saisie des remarques sur les rapports
+router.post('/saisie-remarque-rapports', ministereController.saisieRemarqueRapports);
+
+// Route pour la consultation des rapports 
+router.get('/rapports', ministereController.consulterRapports);
+
+// Route pour la validation du rapport d'instruction
+router.put('/valider-rapports/:id', ministereController.validerRapports);
 
 //patch ajout produit
-router.put('/:id/demande',ajouterproduit)
-
-//Ajout commentaire
-router.put('/:id/demande',Commproduit)
+router.put('/produits',ministereController.ajouterProduit)
 
 module.exports = router;
