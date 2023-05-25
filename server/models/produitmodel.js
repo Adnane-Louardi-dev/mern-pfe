@@ -9,16 +9,27 @@ const produitSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  prix: {
-    type: Number,
-    required: true
+  autorise: {
+    type: Boolean,
+    default: false
+  },
+  //remarques faites par le ministère de santé
+  remarques: {
+    type: [String],
+    default: []
   },
   fabricant: {
     type: Entreprise,
     required: true
+  },
+  ministere: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Ministere'
   }
+
 });
 
 const Produit = mongoose.model('Produit', produitSchema);
 
 module.exports = Produit;
+
