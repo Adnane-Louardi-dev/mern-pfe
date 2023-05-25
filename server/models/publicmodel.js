@@ -12,9 +12,15 @@ const publicSchema = new mongoose.Schema({
   metier: {
     type: String,
     required: true,
+  },
+  commentaire: {
+    type: String,
+    required: true
   }
+  
 });
 
 const Public = mongoose.model('Public', publicSchema);
 
 module.exports = Public;
+
