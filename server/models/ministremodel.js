@@ -6,7 +6,7 @@ const ministereSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true
-  },
+  },/*
   ListeProduits: [{
     nom: {
       type: String,
@@ -18,6 +18,18 @@ const ministereSchema = new mongoose.Schema({
     dateAutorisation: Date,
     dateExpiration: Date,
     status: String
+  }],*/
+  produits: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Produit'
+  }],
+  remarques: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Remarque'
+  }],
+  rapports: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Rapport'
   }]
 });
 
