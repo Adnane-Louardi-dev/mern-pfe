@@ -1,14 +1,14 @@
-const Produit = require('../models/produitmodel');
-const Remarque = require('../models/remarquemodel');
+const Produit = require("../models/produitmodel");
+const Remarque = require("../models/remarquemodels");
 
 // Contrôleur pour consulter la liste des produits autorisés
 exports.consulterProduitsAutorises = (req, res) => {
   // Récupérer la liste des produits autorisés depuis la base de données
   Produit.find({ autorise: true })
-    .then(produits => {
+    .then((produits) => {
       res.status(200).json({ produits });
     })
-    .catch(error => {
+    .catch((error) => {
       res.status(500).json({ error });
     });
 };
@@ -20,14 +20,14 @@ exports.consulterResumeCaracteristiques = (req, res) => {
 
   // Rechercher le produit par son ID dans la base de données
   Produit.findById(produitId)
-    .then(produit => {
+    .then((produit) => {
       if (!produit) {
-        return res.status(404).json({ message: 'Produit non trouvé' });
+        return res.status(404).json({ message: "Produit non trouvé" });
       }
 
       res.status(200).json({ resume: produit.resumeCaracteristiques });
     })
-    .catch(error => {
+    .catch((error) => {
       res.status(500).json({ error });
     });
 };
@@ -38,42 +38,43 @@ exports.saisirRemarquePharmacovigilance = (req, res) => {
   const { produitId, remarqueTexte } = req.body;
 
   Produit.findById(produitId)
-    .then(produit => {
+    .then((produit) => {
       if (!produit) {
-        return res.status(404).json({ message: 'Produit non trouvé' });
+        return res.status(404).json({ message: "Produit non trouvé" });
       }
 
       // Créer une nouvelle remarque
       const remarque = new Remarque({
         produit: produitId,
-        texte: remarqueTexte
+        texte: remarqueTexte,
       });
-      
-  // Enregistrer la remarque dans la base de données
-      remarque.save()
+
+      // Enregistrer la remarque dans la base de données
+      remarque
+        .save()
         .then(() => {
-          res.status(201).json({ message: 'Remarque enregistrée avec succès' });
+          res.status(201).json({ message: "Remarque enregistrée avec succès" });
         })
-        .catch(error => {
+        .catch((error) => {
           res.status(500).json({ error });
         });
     })
-    .catch(error => {
+    .catch((error) => {
       res.status(500).json({ error });
     });
 };
 
 // Contrôleur pour rechercher des produits
 exports.rechercherProduits = (req, res) => {
-    // Récupérer les paramètres de recherche depuis la requête
-    const { keyword } = req.query;
-  
-    // Rechercher les produits correspondant aux critères de recherche dans la base de données
-    Produit.find({ nom: { $regex: keyword, $options: 'i' } })
-      .then((produits) => {
-        res.status(200).json(produits);
-      })
-      .catch((error) => {
-        res.status(500).json({ error: error.message });
-      });
-  };
+  // Récupérer les paramètres de recherche depuis la requête
+  const { keyword } = req.query;
+
+  // Rechercher les produits correspondant aux critères de recherche dans la base de données
+  Produit.find({ nom: { $regex: keyword, $options: "i" } })
+    .then((produits) => {
+      res.status(200).json(produits);
+    })
+    .catch((error) => {
+      res.status(500).json({ error: error.message });
+    });
+};
