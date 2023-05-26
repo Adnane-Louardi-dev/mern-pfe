@@ -10,13 +10,16 @@ router.post('/saisie-remarque-produit', ministereController.saisieRemarqueProdui
 // Route pour la saisie des remarques sur les rapports
 router.post('/saisie-remarque-rapports', ministereController.saisieRemarqueRapports);
 
-// Route pour la consultation des rapports 
-router.get('/rapports', ministereController.consulterRapports);
+//GET all Demandes
+//router.get('/', getDemandes)
 
-// Route pour la validation du rapport d'instruction
-router.put('/valider-rapports/:id', ministereController.validerRapports);
+//GET a Demande
+//router.get('/:id', getDemande)
 
 //patch ajout produit
-router.put('/produits',ministereController.ajouterProduit)
+//router.put('/:id/demande',ajouterproduit)
+
+//Ajout commentaire
+//router.put('/:id/demande',Commproduit)
 
 module.exports = router;

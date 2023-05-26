@@ -1,6 +1,6 @@
-const { Demande } = require('../models/demandemodel');
-//const mongoose = require('mongoose')
-//const unrar = require('unrar');
+
+const { Demande } = require('../models/demandemodel.js');
+
 
 // Récupérer toutes les demandes
 const getDemandes = async (req, res) => {
