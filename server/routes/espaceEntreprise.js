@@ -1,5 +1,5 @@
 const express=require('express')
-const { getMaxListeners } = require('../models/demande.model')
+const { getMaxListeners } = require('../models/demandemodel')
 const router=express.Router()
 router.get("/",(req,res)=>{
     res.json({data:"entreprise route"})
@@ -8,25 +8,25 @@ router.get("/",(req,res)=>{
 //router.use(reqAuth)
 
 //GET all Demandes
-router.get('/', getDemandes)
+//router.get('/', getDemandes)
 
 //GET a Demande
-router.get('/:id', getDemande)
+//router.get('/:id', getDemande)
 
 //POST a Demande
-router.post('/Demande', createDemande)
+//router.post('/Demande', createDemande)
 
 //DELETE a Demande
-router.delete('/:id',deleteDemande)
+//router.delete('/:id',deleteDemande)
 
 //consulter Rapport
-router.get('/rapport/:id',getrapport) 
+//router.get('/rapport/:id',getrapport) 
 
 //plan d'action
-router.put('/plandaction',putplan)
+//router.put('/plandaction',putplan)
 
 //ajout comp
-router.put('/ajoutcomp',putComp)
+//router.put('/ajoutcomp',putComp)
 
 
 module.exports = router;

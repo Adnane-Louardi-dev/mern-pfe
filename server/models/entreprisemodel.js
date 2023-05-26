@@ -30,3 +30,4 @@ const Entreprise = mongoose.model('Entreprise', entrepriseSchema);
 
 // Export du modèle d'entreprise
 module.exports = Entreprise;
+  

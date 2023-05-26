@@ -1,4 +1,4 @@
-const { Demande } = require('./models');
+const { Demande } = require('../models/demandemodel.js');
 
 // Récupérer toutes les demandes
 const getDemandes = async (req, res) => {

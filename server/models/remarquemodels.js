@@ -26,5 +26,6 @@ const remarqueSchema = new mongoose.Schema({
   // Autres champs spécifiques aux remarques
 
 });
+const Remarque = mongoose.model('Remarque', remarqueSchema);
 
 module.exports = Remarque;
