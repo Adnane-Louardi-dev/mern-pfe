@@ -1,5 +1,72 @@
 const Demande = require('../models/demandemodel.js');
+const bcrypt = require('bcryptjs');
+const asyncHandler = require('express-async-handler');
+const Agent = require('../models/agentsmodel.js'); 
+const jwt = require('jsonwebtoken');
 
+const login = asyncHandler( async (req , res )=>{
+  const {email , password} = req.body 
+  const agentuser = await Agent.findOne({email})
+
+  if(agentuser && (await bcrypt.compare(password,agentuser.password))) {
+      res.json({
+        _id:agentuser.id,
+        name:agentuser.nom,
+        lastname:agentuser.prenom , 
+        email:agentuser.email,
+        role:agentuser.role,
+        token:GenerateToken(agentuser._id)
+
+      })
+      
+  } else {
+    res.status(400)
+    throw new Error('Invalid credentials')
+  }
+}
+)
+
+
+const registerUser =asyncHandler(async (req , res )=>{
+  
+  const {name ,lastname , email , password , role} =  req.body 
+  if (!email || !name || !password || !role || !lastname) {
+    
+    res.status(400) 
+    throw new Error('please add all fileds ');
+  }
+  const userExists = await Agent.findOne({email})
+
+
+  if(userExists) {
+    res.status(400)
+    throw new Error('User already exist ')
+  }
+
+  // Hash password 
+  const salt = await bcrypt.genSalt(10)
+  const hashedPassword = await bcrypt.hash(password,salt)
+  const agentuser = await Agent.create({
+    nom:name , 
+    prenom:lastname , 
+    email , 
+    password:hashedPassword , 
+    role ,
+  })
+  if(agentuser) {
+    res.status(201).json({
+      _id:agentuser.id,
+      name:agentuser.nom,
+      lastname:agentuser.prenom , 
+      email:agentuser.email,
+      role:agentuser.role,
+    })
+  } else {
+    res.status(400) 
+    throw new Error('invalid user data ')
+  }
+}
+)
 
 
 const getDemandeEnAttend = async (req, res) => {
@@ -11,6 +78,10 @@ const getDemandeEnAttend = async (req, res) => {
       res.status(500).json({ message: 'Failed to fetch demands en attente.' });
     }
   };
+
+const inpection = (req , res)=>{
+  res.json({message:'welcome to inspection'})
+}
 
 
   const DsignerDateComm = async (req, res) => {
@@ -75,4 +146,13 @@ const getDemandeApprouver = async (req, res) => {
   
 
 
-module.exports = { getDemandeEnAttend ,DsignerDateComm ,getDemandeApprouver , DsignerDateinspection };
+//GenerateToken
+const GenerateToken = (id)=>{
+  return jwt.sign({id},process.env.JWT_SECRET, {
+    expiresIn:'30d',
+  }) 
+}
+
+
+
+module.exports = { getDemandeEnAttend ,DsignerDateComm ,getDemandeApprouver , DsignerDateinspection , login ,registerUser , inpection};
