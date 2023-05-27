@@ -1,5 +1,6 @@
 
-const { Demande } = require('../models/demandemodel.js');
+const Demande = require('../models/demandemodel.js');
+const Rapport = require('../models/rapportmodels.js');
 
 
 // Récupérer toutes les demandes
@@ -7,7 +8,7 @@ const getDemandes = async (req, res) => {
   try {
     //const user_id = req.user._id
     const demandes = await Demande.find({ user_id }).sort({createAt: -1});
-    res.json(demandes);
+    res.status(200).json(demandes);
   } catch (error) {
     res.status(500).json({ error: 'Pas de demandes.' });
   }
@@ -20,7 +21,7 @@ const getDemande = async (req, res) => {
     if (!demande) {
       return res.status(404).json({ error: 'Demande non trouvée' });
     }
-    res.json(demande);
+    res.status(200).json(demande);
   } catch (error) {
     res.status(500).json({ error: 'probleme de la recuperation' });
   }
@@ -71,10 +72,28 @@ const deleteDemande = async (req, res) => {
   }
 };
 
+const getrapport = async (req, res) => {
+  try {
+    const rapportId = req.params.id;
+
+    // Find the rapport in the database
+    const rapport = await Rapport.findById(rapportId);
+
+    if (!rapport) {
+      return res.status(404).json({ message: 'Rapport not found' });
+    }
+
+    res.status(200).json({ rapport });
+  } catch (error) {
+    res.status(500).json({ message: 'erreur' });
+  }
+};
+
 module.exports = {
   getDemandes,
   getDemande,
   createDemande,
   updateDemande,
   deleteDemande,
+  getrapport,
 };
