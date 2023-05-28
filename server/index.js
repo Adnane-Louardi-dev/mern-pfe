@@ -14,6 +14,7 @@ connectToMongo();
 //middlewares
 app.use(cors());
 app.use(morgan("dev"));
+app.use(express.json())
 app.use("/espaceMinistere",ministere)
 app.use("/espacePublic",public)
 app.use("/espaceEntreprise",entreprise)

@@ -1,22 +1,23 @@
-
 const Demande = require('../models/demandemodel.js');
 const Rapport = require('../models/rapportmodels.js');
 
 
 // Récupérer toutes les demandes
 const getDemandes = async (req, res) => {
-  try {
+  Demande.find(/*{ user_id }*/).sort({createAt: -1}).then((Demande)=>res.json(Demande)).catch((err)=>res.json(err))
+  /*try {
     //const user_id = req.user._id
-    const demandes = await Demande.find({ user_id }).sort({createAt: -1});
+   // const demandes = await Demande.find({ user_id }).sort({createAt: -1});
     res.status(200).json(demandes);
   } catch (error) {
     res.status(500).json({ error: 'Pas de demandes.' });
-  }
-};
+  }*/
+}
 
 // Récupérer une demande par son ID
 const getDemande = async (req, res) => {
-  try {
+  Demande.findById(req.params.id).then((Demande)=>res.json(Demande)).catch((err)=>res.json(err))
+ /* try {
     const demande = await Demande.findById(req.params.id);
     if (!demande) {
       return res.status(404).json({ error: 'Demande non trouvée' });
@@ -24,18 +25,21 @@ const getDemande = async (req, res) => {
     res.status(200).json(demande);
   } catch (error) {
     res.status(500).json({ error: 'probleme de la recuperation' });
-  }
+  }*/
 };
 
 // Créer une nouvelle demande
-const createDemande = async (req, res) => {
-  try {
-   // const user_id = req.user._id
-    const demande = await Demande.create(req.body,/*user_id */);
-    res.status(200).json(demande);
-  } catch (error) {
-    res.status(500).json({ error: 'erreur de la création de la demande.' });
-  }
+const createDemande =  async(req, res) => {
+  //const { type, description, dateDepot, statut, entreprise, affecter, dateComm, dateInsp } = req.body
+  //try {
+    Demande.create(req.body).then((Demande)=>res.json(Demande)).catch((err)=>res.json(err))
+   // const user_id = req.user._id 
+  // const demande =  Demande.create(req.body)
+   // const demande = await Demande.create(req.body/*,user_id */)
+  //  res.status(200).json(demande)
+ // } catch (error) {
+  //  res.status(500).json({ error: 'erreur de la création de la demande.' })
+  //}
 };
 /*const   rer file =async(req, res) => {
   const { filePath } = req.body; // Assuming the RAR file path is sent in the request body

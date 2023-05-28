@@ -35,7 +35,7 @@ router.delete('/:id',deleteDemande)
 //router.put('/plandaction',putplan)
 
 //ajout comp
-router.put('/updateDemande',updateDemande)
+router.put('/updateDemande/:id',updateDemande)
 
 
 

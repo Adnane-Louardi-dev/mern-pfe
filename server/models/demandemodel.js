@@ -12,7 +12,8 @@ const demande= new mongoose.Schema({
   },                          
   dateDepot: {
     type: Date, 
-    required: true
+    default: () => { return new Date() }
+    //required: true
   },
   statut: {
     type: String,
@@ -28,11 +29,11 @@ const demande= new mongoose.Schema({
     default:'null'
   } ,dateComm: {
     type: Date,
-    default:'null'
+    default: () => { return new Date() } 
   },dateInsp: {
     type: Date,
-    default:'null'
-  }
+    default: () => { return new Date() } 
+    }
 
 });
 
