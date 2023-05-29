@@ -1,34 +1,34 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 // Définition du schéma de l'agent
 const agentSchema = new mongoose.Schema({
   nom: {
     type: String,
-    required: true
+    required: true,
   },
   prenom: {
     type: String,
-    required: true
+    required: true,
   },
   email: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   role: {
     type: String,
     required: true,
-    enum: ['Administrateur', 'Inspecteur', 'Instructeur']
+    enum: ["Administrateur", "Inspecteur", "Instructeur"],
   },
- 
-  password : {
-    type:String , 
-    required:true
-  }
+
+  password: {
+    type: String,
+    required: true,
+  },
 });
 
 // Création du modèle de l'agent à partir du schéma
-const Agent = mongoose.model('Agent', agentSchema);
+const Agent = mongoose.model("Agent", agentSchema);
 
 // Export du modèle de l'agent
 module.exports = Agent;
