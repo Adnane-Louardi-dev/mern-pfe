@@ -6,13 +6,9 @@ const remarqueSchema = new mongoose.Schema({
     enum: ['produit', 'rapport'],
     required: true
   },
-  produit: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Produit' // Référence au modèle Produit si le type est 'produit'
-  },
-  rapport: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Rapport' // Référence au modèle Rapport si le type est 'rapport'
+  produit:{
+    type: String,
+    required: true
   },
   contenu: {
     type: String,
@@ -22,9 +18,6 @@ const remarqueSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   }
-
-  // Autres champs spécifiques aux remarques
-
 });
 
-module.exports = Remarque;
+module.exports = mongoose.model('Remarque', remarqueSchema);
