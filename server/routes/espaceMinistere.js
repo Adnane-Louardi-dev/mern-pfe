@@ -1,5 +1,7 @@
 const express = require('express');
 const ministereController = require('../controllers/ministre');
+const upload = require('../middleware/multer');
+const path = require('path');
 
 const router = express.Router();
 
@@ -16,10 +18,10 @@ router.post('/saisie-remarque-rapports', ministereController.saisieRemarqueRappo
 //GET a Demande
 //router.get('/:id', getDemande)
 
-//patch ajout produit
-//router.put('/:id/demande',ajouterproduit)
+// Route pour l'ajout d'un produit avec une image
+router.post('/produits', upload.single('image'), ministereController.ajouterProduit);
 
-//Ajout commentaire
-//router.put('/:id/demande',Commproduit)
 
 module.exports = router;
+
+
