@@ -18,18 +18,21 @@ const produitSchema = new mongoose.Schema({
     type: [String],
     default: []
   },
-  fabricant: {
-    type: Entreprise,
+  image: {
+    type: String,
     required: true
   },
+  fabricant: {
+    type: String,
+    required: true
+  }/*,
   ministere: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Ministere'
-  }
+  }*/
 
 });
 
 const Produit = mongoose.model('Produit', produitSchema);
 
 module.exports = Produit;
-
