@@ -20,9 +20,10 @@ const agentSchema = new mongoose.Schema({
     required: true,
     enum: ['Administrateur', 'Inspecteur', 'Instructeur']
   },
-  ministere: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Ministere'
+ 
+  password : {
+    type:String , 
+    required:true
   }
 });
 

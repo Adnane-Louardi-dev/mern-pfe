@@ -12,15 +12,16 @@ router.post('/saisie-remarque-produit', ministereController.saisieRemarqueProdui
 // Route pour la saisie des remarques sur les rapports
 router.post('/saisie-remarque-rapports', ministereController.saisieRemarqueRapports);
 
-// Route pour la consultation des rapports 
-router.get('/rapports', ministereController.consulterRapports);
+//GET all Demandes
+//router.get('/', getDemandes)
 
-// Route pour la validation du rapport d'instruction
-router.put('/valider-rapports/:id', ministereController.validerRapports);
+//GET a Demande
+//router.get('/:id', getDemande)
 
 // Route pour l'ajout d'un produit avec une image
 router.post('/produits', upload.single('image'), ministereController.ajouterProduit);
 
 
 module.exports = router;
+
 

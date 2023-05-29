@@ -7,6 +7,7 @@ const path = require('path');
 const { v4: uuidv4 } = require('uuid');
 
 
+
 const saisieRemarqueProduit = (req, res) => {
   const { produitId, remarque } = req.body;
 

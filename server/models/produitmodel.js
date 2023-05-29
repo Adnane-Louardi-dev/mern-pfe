@@ -1,26 +1,27 @@
-const mongoose = require('mongoose');
-
+const mongoose = require("mongoose");
+const Entreprise = require("./entreprisemodel");
 const produitSchema = new mongoose.Schema({
   nom: {
     type: String,
-    required: true
+    required: true,
   },
   description: {
     type: String,
-    required: true
+    required: true,
   },
   autorise: {
     type: Boolean,
-    default: false
+    default: false,
   },
   //remarques faites par le ministère de santé
   remarques: {
     type: [String],
-    default: []
+    default: [],
   },
   image: {
     type: String,
     required: true
+
   },
   fabricant: {
     type: String,
@@ -31,8 +32,9 @@ const produitSchema = new mongoose.Schema({
     ref: 'Ministere'
   }*/
 
+
 });
 
-const Produit = mongoose.model('Produit', produitSchema);
+const Produit = mongoose.model("Produit", produitSchema);
 
 module.exports = Produit;

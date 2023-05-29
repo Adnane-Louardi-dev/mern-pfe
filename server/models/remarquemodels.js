@@ -19,5 +19,6 @@ const remarqueSchema = new mongoose.Schema({
     default: Date.now
   }
 });
+const Remarque = mongoose.model('Remarque', remarqueSchema);
 
 module.exports = mongoose.model('Remarque', remarqueSchema);

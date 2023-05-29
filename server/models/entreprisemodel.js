@@ -4,7 +4,17 @@ const mongoose = require('mongoose');
 const entrepriseSchema = new mongoose.Schema({
   nom: {
     type: String,
-    required: true
+    required: true,
+    unique : true 
+  },
+  email : {
+    type: String,
+    required: true,
+    unique : true 
+  },
+  password:{
+  type: String,
+  required: true 
   },
   adresse: {
     type: String,
@@ -17,7 +27,8 @@ const entrepriseSchema = new mongoose.Schema({
 
   telephone: {
     type: String,
-    required: true
+    required: true,
+    unique : true 
   },
   autorisations: [{
     type: mongoose.Schema.Types.ObjectId,
@@ -30,3 +41,4 @@ const Entreprise = mongoose.model('Entreprise', entrepriseSchema);
 
 // Export du modèle d'entreprise
 module.exports = Entreprise;
+  
