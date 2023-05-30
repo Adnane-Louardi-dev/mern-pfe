@@ -23,16 +23,21 @@ const demande= new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Entreprise'
   },
-  affecter:{
-    type : String,
-    default:'null'
-  } ,dateComm: {
+  dateComm: {
     type: Date,
     default:'null'
   },dateInsp: {
     type: Date,
     default:'null'
-  }
+  },
+  Inspecteur:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Agent'
+  },
+  Instructeur:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Agent'
+  },
 
 });
 
