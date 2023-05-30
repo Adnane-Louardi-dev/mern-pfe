@@ -4,6 +4,8 @@ const asyncHandler = require('express-async-handler');
 const Agent = require('../models/agentsmodel.js'); 
 const jwt = require('jsonwebtoken');
 
+
+// l'authentification de l'espace agent 
 const login = asyncHandler( async (req , res )=>{
   const {email , password} = req.body 
   const agentuser = await Agent.findOne({email})
@@ -25,7 +27,7 @@ const login = asyncHandler( async (req , res )=>{
   }
 }
 )
-
+// la creation du compte des inspecteurs et des instructeurs par l'admin
 
 const registerUser =asyncHandler(async (req , res )=>{
   
@@ -68,7 +70,7 @@ const registerUser =asyncHandler(async (req , res )=>{
 }
 )
 
-
+// le racuperation des demande en attent 
 const getDemandeEnAttend = async (req, res) => {
     try {
       const demands = await Demande.find({ statut: 'En_attente' });
@@ -79,39 +81,65 @@ const getDemandeEnAttend = async (req, res) => {
     }
   };
 
-const inpection = (req , res)=>{
-  res.json({message:'welcome to inspection'})
-}
 
 
-  const DsignerDateComm = async (req, res) => {
-    const { demandeId } = req.params; // Assuming demandId is the parameter in the URL
-    const { date } = req.params; // Assuming date is the query parameter in the URL
+// l'insertion du date de commission 
+// l'insertion du id de l'instructeur designier par l'admin 
+// le changement d'etat en attent de commission
+  const InsertdateComm = async (req, res) => {
+    const { demandId, dateComm, instructeur } = req.body;
   
     try {
-      const demand = await Demande.findById(demandeId);
+      const demand = await Demande.findById(demandId);
       if (!demand) {
         return res.status(404).json({ message: 'Demand not found.' });
       }
-  
-      demand.dateComm = new Date(date);
+      demand.dateComm = dateComm ? new Date(dateComm) : null;
+      demand.Instructeur = instructeur;
+      demand.dateInsp =  null;
+      demand.Inspecteur = null ; 
+      demand.statut="En_attente_commision "
       await demand.save();
+  
       res.json(demand);
-
     } catch (error) {
       console.error(error);
-      res.status(500).json({ message: 'Failed to set dateComm.' });
+      res.status(500).json({ message: 'Failed to set demand fields.' });
     }
-  };
+
+    }
+  
   
 
-
-
-
-
-
-
-
+// l'insertion du date d'inspection 
+// l'insertion du id de l'inspecteur designier par l'admin 
+// le changement d'etat en attent d'inspection 
+ 
+    const InsertdateInspect = async (req, res) => {
+      const { demandId, dateInsp, inspecteur } = req.body;
+    
+      try {
+        const demand = await Demande.findById(demandId);
+        if (!demand) {
+          return res.status(404).json({ message: 'Demand not found.' });
+        }
+        demand.dateInsp = dateInsp ? new Date(dateInsp) : null;
+        demand.Inspecteur = inspecteur;
+        demand.dateComm = demand.dateComm;
+        demand.Instructeur = demand.Instructeur;
+        demand.statut="En_attente_inpection"
+        await demand.save();
+    
+        res.json(demand);
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Failed to set date and inspection.' });
+      }
+  
+      }
+    
+    
+// la recuperation des demande approuvée par l'instruction 
 const getDemandeApprouver = async (req, res) => {
     try {
       const demands = await Demande.find({ statut: 'Approuvée' });
@@ -123,27 +151,30 @@ const getDemandeApprouver = async (req, res) => {
   };
 
 
+// get list des instructeurs 
+const getListInsructeur = async (req, res) => {
+  try {
+    const agentsIst = await Agent.find({ role: "Instructeur" });
+    res.json(agentsIst);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Failed to fetch list des instructeurs.' });
+  }
+};
 
-  const DsignerDateinspection = async (req, res) => {
-    const { demandeId } = req.params; 
-    const { date } = req.params; 
-  
-    try {
-      const demand = await Demande.findById(demandeId);
-      if (!demand) {
-        return res.status(404).json({ message: 'Demand not found.' });
-      }
-  
-      demand.dateComm = new Date(date);
-      await demand.save();
-      res.json(demand);
+// get list des inspecteurs 
+const getListInnpecteur = async (req, res) => {
+  try {
+    const agentsInsp = await Agent.find({ role: "Inspecteur" });
+    res.json(agentsInsp);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Failed to fetch list des inspecteurs.' });
+  }
+};
 
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Failed to set dateComm.' });
-    }
-  };
-  
+
+ 
 
 
 //GenerateToken
@@ -155,4 +186,4 @@ const GenerateToken = (id)=>{
 
 
 
-module.exports = { getDemandeEnAttend ,DsignerDateComm ,getDemandeApprouver , DsignerDateinspection , login ,registerUser , inpection};
+module.exports = { getDemandeEnAttend ,getDemandeApprouver ,  login ,registerUser , InsertdateComm  , getListInsructeur , getListInnpecteur , InsertdateInspect};
