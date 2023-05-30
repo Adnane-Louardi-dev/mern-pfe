@@ -1,5 +1,5 @@
 const Produit = require('../models/produitmodel');
-const Remarque = require('../models/remarquemodel');
+const Remarque = require('../models/remarquemodels');
 const Public = require('../models/publicmodel');
 const Chance = require('chance');
 const chance = new Chance();

@@ -1,5 +1,5 @@
-const Remarque = require('../models/remarquemodel');
-const Rapport = require('../models/rapportmodel');
+const Remarque = require('../models/remarquemodels');
+const Rapport = require('../models/rapportmodels');
 const Produit= require('../models/produitmodel');
   
 const fs = require('fs');
