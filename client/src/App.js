@@ -1,21 +1,30 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Route, Routes } from 'react-router-dom';
+import AgentLogin  from './espace_agents/agent_login/AgentLogin'
+import AgentAdmin from './espace_agents/agent_admin/AgentAdmin'
+import AgentInspection from './espace_agents/Agent_inspecteur/AgentInspection'
+import  AgentInstruction  from "./espace_agents/agent_instructeur/AgentInstruction";
+import  NotFound from './NotFound'
+import React from 'react'
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+const App = () => {
+  return (
+    
+     
+      <Routes>
+       <Route path='/' element={<h1>welcome espace public</h1>} />
+       <Route path='/espaceAgent'>
+       <Route path='login' element={<AgentLogin/>} />
+       <Route path='Admin' element={<AgentAdmin/>} />
+       <Route path='Inspection' element={<AgentInspection/>} />
+       <Route path='Instruction' element={<AgentInstruction/>} />
+       </Route>
+       <Route  path='*' element={<NotFound/>}/>
+      </Routes>
     );
-  }
+  
 }
 
-export default App;
+export default App
+
+
