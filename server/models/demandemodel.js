@@ -1,48 +1,55 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 // Définition du schéma de demande d'autorisation
-const demande= new mongoose.Schema({
+const demande = new mongoose.Schema({
   type: {
     type: String,
-    required: true
+    required: true,
   },
   description: {
     type: String,
-    required: true
-  },                          
+    required: true,
+  },
   dateDepot: {
-    type: Date, 
-    required: true
+    type: Date,
+    required: true,
   },
   statut: {
     type: String,
     required: true,
-    enum: ['En_attente','En_attente_commision ','En_attente_inpection', 'Approuvée', 'Rejetée','inspecte']
+    enum: [
+      "En_attente",
+      "En_attente_commision ",
+      "En_attente_inspection",
+      "Approuvée",
+      "Rejetée",
+      "inspecte",
+    ],
   },
   entreprise: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Entreprise'
+    ref: "Entreprise",
   },
   dateComm: {
     type: Date,
-    default:'null'
-  },dateInsp: {
+    default: "null",
+  },
+  dateInsp: {
     type: Date,
-    default:'null'
+    default: "null",
   },
-  Inspecteur:{
+  Inspecteur: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Agent'
+    ref: "Agent",
   },
-  Instructeur:{
+  Instructeur: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Agent'
+    ref: "Agent",
   },
-
 });
 
 // Création du modèle de demande d'autorisation à partir du schéma
-const Demande = mongoose.model('Demande', demande);
+const Demande = mongoose.model("Demande", demande);
 
 // Export du modèle de demande d'autorisation
 module.exports = Demande;
