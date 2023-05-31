@@ -21,9 +21,9 @@ router.get('/Admin/Commission/listInstructeurs',protect("Administrateur"),getLis
 //consulter les demande en attente  approver par instruction 
 router.get('/Admin/Inspection',protect("Administrateur"),getDemandeApprouver );
 // designer la date et l'inspection et changer la status en attend inspection 
-router.put('/Admin/inspection',protect("Administrateur"),InsertdateInspect);
+router.put('/Admin/Inspection',protect("Administrateur"),InsertdateInspect);
 
 // get list instructeure
-router.get('/Admin/inspection/listInspecteurs',protect("Administrateur"),getListInnpecteur);
+router.get('/Admin/Inspection/listInspecteurs',protect("Administrateur"),getListInnpecteur);
 
 module.exports = router;
