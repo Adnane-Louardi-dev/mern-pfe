@@ -10,11 +10,21 @@ const {
     deleteDemande,
     updateDemande,
     getrapport,
+    login,
+    signup,
    // putplan,
 } = require('../controllers/entreprise')
 
+const reqAuth = require('../middleware/reqAuth')
 
 //router.use(reqAuth)
+router.use(reqAuth)
+
+//login route
+router.post('/login', login)
+
+//sign up route
+router.post('/signup', signup)
 
 //GET all Demandes
 router.get('/', getDemandes)
