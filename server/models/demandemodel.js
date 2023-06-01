@@ -22,7 +22,6 @@ const demande = new mongoose.Schema({
     type: Date, 
     default: () => { return new Date() }
     //required: true
-
   },
   statut: {
     type: String,
@@ -61,8 +60,6 @@ const demande = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Agent'
   },
-
-
 });
 
 // Création du modèle de demande d'autorisation à partir du schéma

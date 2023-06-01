@@ -4,8 +4,9 @@ import {useSelector , useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { registerAgent, reset } from '../../features/auth/authSlice'
 
+
 const Register = () => {
-    const {formData , setformData} = useState({
+    const [formData , setFormData] = useState({
         nom:'',
         prenom:'',
         email:'',
@@ -24,16 +25,19 @@ useEffect (()=>{
   if(isError) {
     console.log(message) 
   }
-  if(isSuccess || Agentuser ) {
-    navigate('/espaceAgen/Admin')
+  if(isSuccess  ) {
+    navigate('/espaceAgent/Admin')
+  }
+  if(isError){
+    navigate('/espaceAgent/login')
   }
   dispatch(reset())
 
 }, [Agentuser ,  isError , isSuccess , message , navigate , dispatch])
 const onChange = (e)=>{
-    setformData((prevState)=>({
+  setFormData((prevState)=>({
         ...prevState,
-        [e.target.nom]:e.target.value
+        [e.target.name]:e.target.value
     }))
 }
 
@@ -47,6 +51,7 @@ const onSubmit = (e)=> {
       role ,
       password
     }
+    console.log(UserData)
   dispatch(registerAgent(UserData))
 }
   return (
@@ -60,6 +65,7 @@ const onSubmit = (e)=> {
             <input type="text" placeholder='enter ur name ' id='nom' name='nom' value={nom} onChange={onChange}  />
             <input type="text" placeholder='enter ur last name ' id='prenom' name='prenom' value={prenom} onChange={onChange}  />
             <select name="role" id="role" value={role} onChange={onChange}>
+                <option> Select role</option>
                 <option value="Inspecteur">Inspecteur</option>
                 <option value="Instructeur">Instructeur</option> 
             </select>
