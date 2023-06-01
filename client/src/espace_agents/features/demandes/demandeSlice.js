@@ -23,6 +23,20 @@ async(_,thunkAPI)=>{
     }
 })
 
+//get demande en attent d'inspection  demandeInp
+export const demandeInsp = createAsyncThunk('espaceAgent/Admin/Inspection',
+async(_,thunkAPI)=>{
+    try {
+        const token = thunkAPI.getState().auth.Agentuser.token
+        return await demandeService.inspection(token)
+        
+    } catch (error) {
+        const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toSting()
+        return thunkAPI.rejectWithValue(message)
+    }
+})
+
+
 export const demandeSlice = createSlice({
      name:'demande',
      initialState,
@@ -47,6 +61,20 @@ export const demandeSlice = createSlice({
             state.demande = action.payload
         })
         .addCase(demandeCom.rejected,(state,action)=>{
+            state.isLoading = false 
+            state.isError = true 
+            state.message = action.payload 
+           
+        })
+        .addCase(demandeInsp.pending,(state)=>{
+            state.isLoading=true
+        })
+        .addCase(demandeInsp.fulfilled, (state,action)=>{
+            state.isLoading = false 
+            state.isSuccess = true 
+            state.demande = action.payload
+        })
+        .addCase(demandeInsp.rejected,(state,action)=>{
             state.isLoading = false 
             state.isError = true 
             state.message = action.payload 
