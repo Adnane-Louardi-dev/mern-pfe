@@ -18,7 +18,7 @@ const {
 const reqAuth = require('../middleware/reqAuth')
 
 //router.use(reqAuth)
-router.use(reqAuth)
+
 
 //login route
 router.post('/login', login)
