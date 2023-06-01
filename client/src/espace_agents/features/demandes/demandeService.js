@@ -12,7 +12,7 @@ const commission = async (token)=>{
     return response.data
 }
 
-
+// get demande en attent d'inspection 
 const inspection = async (token)=>{
     const config = {
         headers:{

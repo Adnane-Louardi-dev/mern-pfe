@@ -3,6 +3,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { reset ,demandeInsp } from '../../features/demandes/demandeSlice'
+import {listInspecteurs} from '../../features/list_Inspecteur_Instructeur/listSlice'
+
+
 
 const Admin_Inspection = () => {
 
@@ -20,7 +23,7 @@ const Admin_Inspection = () => {
     if(!Agentuser) {
       navigate('/espaceAgent/login')
     }
-
+    dispatch(listInspecteurs())
     dispatch(demandeInsp())
     return () => dispatch( reset())
   },[Agentuser , navigate , isError ,message , dispatch])
