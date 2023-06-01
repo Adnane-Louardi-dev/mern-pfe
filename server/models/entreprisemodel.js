@@ -29,11 +29,11 @@ const entrepriseSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique : true 
-  },
-  autorisations: [{
+  }//,
+  /*autorisations: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Autorisation'
-  }]
+  }]*/
 });
 
 // Création du modèle d'entreprise à partir du schéma

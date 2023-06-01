@@ -10,9 +10,18 @@ const demande = new mongoose.Schema({
     type: String,
     required: true,
   },
+  file1: {
+    data: Buffer,
+    contentType: String,
+  },
+  file2: {
+    data: Buffer,
+    contentType: String,
+  },
   dateDepot: {
-    type: Date,
-    required: true,
+    type: Date, 
+    default: () => { return new Date() }
+    //required: true
   },
   statut: {
     type: String,
@@ -25,6 +34,11 @@ const demande = new mongoose.Schema({
       "Rejetée",
       "inspecte",
     ],
+    default : 'En_attente',
+  },
+  produit: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Produit'
   },
   entreprise: {
     type: mongoose.Schema.Types.ObjectId,
@@ -32,18 +46,18 @@ const demande = new mongoose.Schema({
   },
   dateComm: {
     type: Date,
-    default: "null",
+    default: () => { return new Date() } 
   },
   dateInsp: {
     type: Date,
-    default: "null",
+    default: () => { return new Date() } 
   },
-  Inspecteur: {
+  Inspecteur:{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Agent",
     default: "null",
   },
-  Instructeur: {
+  Instructeur:{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Agent",
     default: "null",
@@ -52,6 +66,7 @@ const demande = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Rapport",
     default: "null",
+    ref: 'Agent'
   },
 });
 

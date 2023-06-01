@@ -16,7 +16,8 @@ const initialState = {
 export const registerAgent = createAsyncThunk('/espaceAgent/Admin/register',
 async(user,thunkAPI)=>{
     try {
-        return await authService.register(user)
+        const token = thunkAPI.getState().auth.Agentuser.token
+        return await authService.register(user , token)
     } catch (error) {
         const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toSting()
         return thunkAPI.rejectWithValue(message)
@@ -28,6 +29,7 @@ async(user,thunkAPI)=>{
 export const loginAgent = createAsyncThunk('/espaceAgent/login',
 async(user,thunkAPI)=>{
     try {
+        
         return await authService.login(user)
     } catch (error) {
         const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toSting()

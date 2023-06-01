@@ -22,13 +22,13 @@ const {Agentuser , isLoading , isError , isSuccess , message} = useSelector(
     if(isError) {
       console.log(message) 
     }
-    if(isSuccess && Agentuser.role=="Administrateur" ) {
+    if(isSuccess && Agentuser.role==="Administrateur" ) {
       navigate('/espaceAgent/Admin')
     }
-    if(isSuccess && Agentuser.role=="Inspecteur" ) {
+    if(isSuccess && Agentuser.role==="Inspecteur" ) {
       navigate('/espaceAgent/Inspection')
     }
-    if(isSuccess && Agentuser.role=="Instructeur" ) {
+    if(isSuccess && Agentuser.role==="Instructeur" ) {
       navigate('/espaceAgent/Instruction')
     }
    

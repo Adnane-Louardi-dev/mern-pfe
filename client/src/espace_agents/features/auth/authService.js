@@ -1,9 +1,17 @@
 import axios from 'axios'
+import { useSelector } from 'react-redux'
 
 // register agent 
-const register= async (userData)=>{
+const register= async (userData , token) =>{
+
+    const config = {
+        headers:{
+            Authorization : `Bearer ${token}`,
+        },
+    }
+    
    
-    const response = await axios.post('/espaceAgent/Admin/register',userData);
+    const response = await axios.post('/espaceAgent/Admin/register',userData , config  );
 
     if(response.data) {
         localStorage.setItem('Agentuser',JSON.stringify(response.data))

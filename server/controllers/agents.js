@@ -29,8 +29,8 @@ const login = asyncHandler(async (req, res) => {
 // la creation du compte des inspecteurs et des instructeurs par l'admin
 
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, lastname, email, password, role } = req.body;
-  if (!email || !name || !password || !role || !lastname) {
+  const { nom, prenom, email, password, role } = req.body;
+  if (!email || !nom || !password || !role || !prenom) {
     res.status(400);
     throw new Error("please add all fileds ");
   }
@@ -45,8 +45,8 @@ const registerUser = asyncHandler(async (req, res) => {
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
   const agentuser = await Agent.create({
-    nom: name,
-    prenom: lastname,
+    nom,
+    prenom,
     email,
     password: hashedPassword,
     role,

@@ -1,12 +1,10 @@
-const Remarque = require('../models/remarquemodels');
-const Rapport = require('../models/rapportmodels');
-const Produit= require('../models/produitmodel');
-  
-const fs = require('fs');
-const path = require('path');
-const { v4: uuidv4 } = require('uuid');
+const Remarque = require("../models/remarquemodels");
+const Rapport = require("../models/rapportmodels");
+const Produit = require("../models/produitmodel");
 
-
+const fs = require("fs");
+const path = require("path");
+const { v4: uuidv4 } = require("uuid");
 
 const saisieRemarqueProduit = (req, res) => {
   const { produitId, remarque } = req.body;
@@ -24,7 +22,8 @@ const saisieRemarqueProduit = (req, res) => {
         remarque: remarque,
       });
 
-      nouvelleRemarque.save()
+      nouvelleRemarque
+        .save()
         .then(() => {
           // Remarque saved successfully
           res.status(200).json({ message: "Remarque sur le produit enregistrée avec succès." });
@@ -39,7 +38,7 @@ const saisieRemarqueProduit = (req, res) => {
       res.status(500).json({ message: "Failed to retrieve the product." });
     });
 };
-  
+
 const saisieRemarqueRapports = (req, res) => {
   const { rapportId, remarque } = req.body;
 
@@ -55,7 +54,7 @@ const saisieRemarqueRapports = (req, res) => {
       // Create a new remarque object using the provided data
       const newRemarque = new Remarque({
         rapport: rapportId,
-        contenu: remarque
+        contenu: remarque,
       });
 
       // Save the new remarque in the database
@@ -90,12 +89,12 @@ const consulterRapports = (req, res) => {
     }
   });
 };
-  
+
 // Logique pour la validation du rapport d'instruction
 const validerRapports = (req, res) => {
   const rapportId = req.params.id;
   const { action } = req.body;
-  
+
   // Find the rapport by ID
   Rapport.findById(rapportId, (err, rapport) => {
     if (err) {
@@ -110,7 +109,7 @@ const validerRapports = (req, res) => {
           // Update the validation status of the rapport
           rapport.valide = false;
         }
-        
+
         // Save the updated rapport
         rapport.save((err) => {
           if (err) {
@@ -137,7 +136,7 @@ const ajouterProduit = (req, res) => {
   const nomFichier = uuidv4() + path.extname(imageProduit.originalname);
 
   // Déplacer l'image vers le répertoire de stockage
-  fs.renameSync(imageProduit.path, path.join(__dirname, '../public/images', nomFichier));
+  fs.renameSync(imageProduit.path, path.join(__dirname, "../public/images", nomFichier));
 
   // Créer une instance du modèle de produit avec les données reçues
   const nouveauProduit = new Produit({
@@ -146,11 +145,12 @@ const ajouterProduit = (req, res) => {
     image: nomFichier,
     autorise: true,
     fabricant: Fabricant,
-    remarques: remarquesMinistere
+    remarques: remarquesMinistere,
   });
 
   // Sauvegarder le nouveau produit dans la base de données
-  nouveauProduit.save()
+  nouveauProduit
+    .save()
     .then(() => {
       // Réponse de réussite
       res.status(200).json({ message: "Produit ajouté avec succès." });
@@ -160,15 +160,11 @@ const ajouterProduit = (req, res) => {
       res.status(500).json({ error: error.message });
     });
 };
- 
-  
-  module.exports = {
-    saisieRemarqueProduit,
-    saisieRemarqueRapports,
-    consulterRapports,
-    validerRapports,
-    ajouterProduit
-  };
-  
 
-
+module.exports = {
+  saisieRemarqueProduit,
+  saisieRemarqueRapports,
+  consulterRapports,
+  validerRapports,
+  ajouterProduit,
+};
