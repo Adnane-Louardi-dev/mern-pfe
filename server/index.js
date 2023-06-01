@@ -18,8 +18,12 @@ connectToMongo();
 app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
-app.use(express.static(path.join(__dirname, "public")));
-app.use(bodyParser.json());
+app.use(express.json())
+app.use("/espaceMinistere",ministere)
+app.use("/espacePublic",public)
+app.use("/espaceEntreprise",entreprise)
+app.use("/espaceAgent",agent)
+
 
 app.use("/espaceMinistere", ministere);
 app.use("/espacePublic", publicRoutes);

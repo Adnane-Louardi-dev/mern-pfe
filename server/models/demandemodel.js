@@ -11,8 +11,10 @@ const demande = new mongoose.Schema({
     required: true,
   },
   dateDepot: {
-    type: Date,
-    required: true,
+    type: Date, 
+    default: () => { return new Date() }
+    //required: true
+
   },
   statut: {
     type: String,
@@ -32,20 +34,13 @@ const demande = new mongoose.Schema({
   },
   dateComm: {
     type: Date,
-    default: "null",
-  },
-  dateInsp: {
+    default: () => { return new Date() } 
+  },dateInsp: {
     type: Date,
-    default: "null",
-  },
-  Inspecteur: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Agent",
-  },
-  Instructeur: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Agent",
-  },
+    default: () => { return new Date() } 
+    }
+
+
 });
 
 // Création du modèle de demande d'autorisation à partir du schéma
