@@ -38,7 +38,15 @@ const demande = new mongoose.Schema({
   },dateInsp: {
     type: Date,
     default: () => { return new Date() } 
-    }
+    } ,
+   Inspecteur: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Agent",
+    },
+  Instructeur: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Agent",
+    },
 
 
 });
