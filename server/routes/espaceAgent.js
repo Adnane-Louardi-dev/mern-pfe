@@ -63,5 +63,3 @@ router.post(
 );
 
 module.exports = router;
-
-//, upload.single("")
