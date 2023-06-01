@@ -1,8 +1,11 @@
-const Demande = require("../models/demandemodel.js");
 const bcrypt = require("bcryptjs");
 const asyncHandler = require("express-async-handler");
-const Agent = require("../models/agentsmodel.js");
 const jwt = require("jsonwebtoken");
+
+const Demande = require("../models/demandemodel.js");
+const Agent = require("../models/agentsmodel.js");
+const Rapport = require("../models/rapportmodels");
+const ObjectId = require("mongodb").ObjectId;
 
 // l'authentification de l'espace agent
 const login = asyncHandler(async (req, res) => {
@@ -114,7 +117,7 @@ const InsertdateInspect = async (req, res) => {
     demand.Inspecteur = inspecteur;
     demand.dateComm = demand.dateComm;
     demand.Instructeur = demand.Instructeur;
-    demand.statut = "En_attente_inpection";
+    demand.statut = "En_attente_inspection";
     await demand.save();
 
     res.json(demand);
@@ -166,11 +169,10 @@ const GenerateToken = (id) => {
 
 const getDemandesEnAttInspection = async (req, res) => {
   try {
-    const user_id = req.user._id;
     const demandes = await Demande.find({
-      Inspecteur: user_id,
+      Inspecteur: req.user._id,
       statut: "En_attente_inspection",
-    });
+    }).sort({ dateInsp: 1 });
     if (!demandes) {
       return res
         .status(404)
@@ -179,6 +181,47 @@ const getDemandesEnAttInspection = async (req, res) => {
     res.json(demandes);
   } catch (error) {
     res.status(500).json({ error: "probleme de la recuperation" });
+  }
+};
+// Récupérer une demande par son ID
+const getDemande = async (req, res) => {
+  try {
+    const demande = await Demande.findOne({
+      _id: req.params.id,
+      statut: "En_attente_inspection",
+    });
+    if (!demande) {
+      return res.status(404).json({ error: "Demande non trouvée" });
+    }
+    res.json(demande);
+  } catch (error) {
+    res.status(500).json({ error: "problème de la récupération" });
+  }
+};
+
+const validerRapportInspection = async (req, res) => {
+  try {
+    // if (!req.demandId) {
+    //   return res.status(404).json({ error: "Insèrer 1 fichier au minimum" });
+    // }
+    //console.log(req.user.role);
+
+    const rapport = new Rapport({
+      type: "inspection", //req.user.role
+      agents: new ObjectId(req.user.id), //req.user._id
+      rapport: req.body.description,
+    });
+    await rapport.save();
+    await Demande.findByIdAndUpdate(
+      { _id: req.body.demandeId }, //"647268a4f3736f875b0186fc"
+      {
+        statut: "inspecte",
+        rapport: new ObjectId(rapport.id),
+      }
+    );
+    res.json({ message: "avec succès" });
+  } catch (error) {
+    res.status(500).json({ error: "problème de la récupération" });
   }
 };
 
@@ -192,4 +235,6 @@ module.exports = {
   getListInnpecteur,
   InsertdateInspect,
   getDemandesEnAttInspection,
+  getDemande,
+  validerRapportInspection,
 };
