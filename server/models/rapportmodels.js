@@ -1,42 +1,39 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const rapportSchema = new mongoose.Schema({
   type: {
     type: String,
-    enum: ['instruction', 'inspection'],
-    required: true
+    enum: ["instruction", "inspection"],
+    required: true,
   },
   agents: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Agent'
+    ref: "Agent",
   },
   rapport: {
-    type: {
-        data: Buffer,
-        contentType: String
-      },
-    required: true
+    type: String,
+    maxlength: 10000,
+    required: true,
   },
   dateCreation: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
   //remarques faites par le ministère de santé
   remarques: {
     type: [String],
-    default: []
+    default: [],
   },
   valide: {
     type: Boolean,
-    default: false
+    default: false,
   },
   ministere: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Ministere'
-  }
+    ref: "Ministere",
+  },
 
-  // Autres champs 
-
+  // Autres champs
 });
 
-module.exports = mongoose.model('Rapport', rapportSchema);
+module.exports = mongoose.model("Rapport", rapportSchema);

@@ -41,10 +41,17 @@ const demande = new mongoose.Schema({
   Inspecteur: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Agent",
+    default: "null",
   },
   Instructeur: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Agent",
+    default: "null",
+  },
+  rapport: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Rapport",
+    default: "null",
   },
 });
 

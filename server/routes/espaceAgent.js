@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { protect } = require("../middleware/Authmiddleware");
+const upload = require("../middleware/multer");
 
 const {
   getDemandeEnAttend,
@@ -12,6 +13,8 @@ const {
   getListInnpecteur,
   InsertdateInspect,
   getDemandesEnAttInspection,
+  getDemande,
+  validerRapportInspection,
 } = require("../controllers/agents");
 
 // login
@@ -44,11 +47,21 @@ router.get(
   getListInnpecteur
 );
 
-//consulter les demande en attente d'inspection
+//consulter les demandes en attente d'inspection
 router.get(
-  "/Inspection/getDemande",
+  "/Inspection/getDemandes",
   protect("Inspecteur"),
   getDemandesEnAttInspection
 );
+//GET a Demande par ID
+router.get("/Inspection/:id", protect("Inspecteur"), getDemande);
+//Valider le Rapport d'inspection
+router.post(
+  "/Inspection/EnregistrerRapport",
+  protect("Inspecteur"),
+  validerRapportInspection
+);
 
 module.exports = router;
+
+//, upload.single("")
