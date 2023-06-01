@@ -10,11 +10,18 @@ const demande = new mongoose.Schema({
     type: String,
     required: true,
   },
+  file1: {
+    data: Buffer,
+    contentType: String,
+  },
+  file2: {
+    data: Buffer,
+    contentType: String,
+  },
   dateDepot: {
     type: Date, 
     default: () => { return new Date() }
     //required: true
-
   },
   statut: {
     type: String,
@@ -27,6 +34,11 @@ const demande = new mongoose.Schema({
       "Rejetée",
       "inspecte",
     ],
+    default : 'En_attente',
+  },
+  produit: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Produit'
   },
   entreprise: {
     type: mongoose.Schema.Types.ObjectId,
@@ -35,20 +47,19 @@ const demande = new mongoose.Schema({
   dateComm: {
     type: Date,
     default: () => { return new Date() } 
-  },dateInsp: {
+  },
+  dateInsp: {
     type: Date,
     default: () => { return new Date() } 
-    } ,
-   Inspecteur: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Agent",
-    },
-  Instructeur: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Agent",
-    },
-
-
+  },
+  Inspecteur:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Agent'
+  },
+  Instructeur:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Agent'
+  },
 });
 
 // Création du modèle de demande d'autorisation à partir du schéma

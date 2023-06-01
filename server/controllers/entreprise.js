@@ -7,13 +7,15 @@ const jwt = require('jsonwebtoken');
 
 // Récupérer toutes les demandes
 const getDemandes = async (req, res) => {
-  Demande.find(/*{ user_id }*/).sort({createAt: -1}).then((Demande)=>res.json(Demande)).catch((err)=>res.json(err))
-  
+   //const Entreprise_id = req.user._id
+
+  //Demande.find({ Entreprise_id }).sort({createAt: -1}).then((Demande)=>res.json(Demande)).catch((err)=>res.json(err))
+  Demande.find({ /*Entreprise_id*/ }).sort({createAt: -1}).populate('produit').then((Demande)=>res.json(Demande)).catch((err)=>res.json(err));
 }
 
 // Récupérer une demande par son ID
 const getDemande = async (req, res) => {
-  Demande.findById(req.params.id).then((Demande)=>res.json(Demande)).catch((err)=>res.json(err))
+  Demande.findById(req.params.id).populate('produit').then((Demande)=>res.json(Demande)).catch((err)=>res.json(err))
 
 };
 

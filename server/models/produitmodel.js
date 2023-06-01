@@ -24,8 +24,8 @@ const produitSchema = new mongoose.Schema({
 
   },
   fabricant: {
-    type: String,
-    required: true
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Entreprise',
   }/*,
   ministere: {
     type: mongoose.Schema.Types.ObjectId,
