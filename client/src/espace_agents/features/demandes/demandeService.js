@@ -15,3 +15,5 @@ const commission = async (token)=>{
 const demandeService = {
     commission,
 }
+
+export default demandeService

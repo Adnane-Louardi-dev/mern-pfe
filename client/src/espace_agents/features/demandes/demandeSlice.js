@@ -1,5 +1,5 @@
 import {createSlice , createAsyncThunk} from '@reduxjs/toolkit'
-import {commission} from './demandeService'
+import demandeService from './demandeService'
 
 const initialState = {
     demande:[],
@@ -11,10 +11,11 @@ const initialState = {
 }
 
 // get demande en attent de commission 
-export const demandeCom = createAsyncThunk('/espaceAgent/Admin/Commission',async(_,thunkAPI)=>{
+export const demandeCom = createAsyncThunk('espaceAgent/Admin/Commission',
+async(_,thunkAPI)=>{
     try {
         const token = thunkAPI.getState().auth.Agentuser.token
-        return await commission(token)
+        return await demandeService.commission(token)
         
     } catch (error) {
         const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toSting()
@@ -26,7 +27,14 @@ export const demandeSlice = createSlice({
      name:'demande',
      initialState,
      reducers: {
-        reset:(state)=>initialState
+        reset:(state)=> {
+            state.demande=[],
+            state.isError=false,
+            state.isSuccess=false,
+            state.isLoading=false,
+            state.message=''
+        
+        }
      }, 
      extraReducers:(builder)=>{
         builder
@@ -36,7 +44,7 @@ export const demandeSlice = createSlice({
         .addCase(demandeCom.fulfilled, (state,action)=>{
             state.isLoading = false 
             state.isSuccess = true 
-            state.demande.push(action.payload)
+            state.demande = action.payload
         })
         .addCase(demandeCom.rejected,(state,action)=>{
             state.isLoading = false 
