@@ -1,7 +1,6 @@
 require("dotenv").config();
 const cors = require("cors");
 const express = require("express");
-const bodyParser = require("body-parser");
 const app = express();
 const connectToMongo = require("./db");
 const morgan = require("morgan");
@@ -18,13 +17,6 @@ connectToMongo();
 app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
-app.use(express.json())
-app.use("/espaceMinistere",ministere)
-app.use("/espacePublic",public)
-app.use("/espaceEntreprise",entreprise)
-app.use("/espaceAgent",agent)
-
-
 app.use("/espaceMinistere", ministere);
 app.use("/espacePublic", publicRoutes);
 app.use("/espaceEntreprise", entreprise);
