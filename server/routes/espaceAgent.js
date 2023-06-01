@@ -26,11 +26,7 @@ router.get("/Admin/Commission", protect("Administrateur"), getDemandeEnAttend);
 router.put("/Admin/Commission", protect("Administrateur"), InsertdateComm);
 
 // get list instructeures
-router.get(
-  "/Admin/Commission/listInstructeurs",
-  protect("Administrateur"),
-  getListInsructeur
-);
+router.get("/Admin/Commission/listInstructeurs",protect("Administrateur"),getListInsructeur);
 
 //consulter les demande en attente  approver par instruction
 router.get("/Admin/Inspection", protect("Administrateur"), getDemandeApprouver);
@@ -38,18 +34,10 @@ router.get("/Admin/Inspection", protect("Administrateur"), getDemandeApprouver);
 router.put("/Admin/inspection", protect("Administrateur"), InsertdateInspect);
 
 // get list instructeure
-router.get(
-  "/Admin/inspection/listInspecteurs",
-  protect("Administrateur"),
-  getListInnpecteur
-);
+router.get("/Admin/inspection/listInspecteurs",protect("Administrateur"), getListInnpecteur);
 
 //consulter les demande en attente d'inspection
-router.get(
-  "/Inspection/getDemande",
-  protect("Inspecteur"),
-  getDemandesEnAttInspection
-);
+router.get("/Inspection/getDemande",protect("Inspecteur"), getDemandesEnAttInspection);
 
 module.exports = router;
 

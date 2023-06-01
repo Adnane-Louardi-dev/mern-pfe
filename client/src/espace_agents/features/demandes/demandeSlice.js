@@ -41,7 +41,7 @@ export const demandeSlice = createSlice({
      name:'demande',
      initialState,
      reducers: {
-        reset:(state)=> {
+        resetDemandes:(state)=> {
             state.demande=[],
             state.isError=false,
             state.isSuccess=false,
@@ -84,5 +84,5 @@ export const demandeSlice = createSlice({
      }
 })
 
-export const {reset} = demandeSlice.actions
+export const {resetDemandes} = demandeSlice.actions
 export default demandeSlice.reducer
