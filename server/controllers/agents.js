@@ -216,6 +216,7 @@ const validerRapportInspection = async (req, res) => {
       { _id: req.body.demandeId }, //"647268a4f3736f875b0186fc"
       {
         statut: "inspecte",
+        rapport: new ObjectId(rapport.id),
       }
     );
     res.json({ message: "avec succès" });
