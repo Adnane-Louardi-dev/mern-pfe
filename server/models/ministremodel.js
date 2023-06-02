@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 // Définition du schéma du ministère
 const ministereSchema = new mongoose.Schema({
