@@ -1,60 +1,58 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const {protect}=require('../middleware/Authmiddleware');
+const { protect } = require("../middleware/Authmiddleware");
+const upload = require("../middleware/multer");
 
-const { getDemandeEnAttend , DsignerDateComm , getDemandeApprouver ,DsignerDateinspection , login , registerUser , inpection } = require('../controllers/agents');
+const {
+  getDemandeEnAttend,
+  getDemandeApprouver,
+  login,
+  registerUser,
+  InsertdateComm,
+  getListInsructeur,
+  getListInnpecteur,
+  InsertdateInspect,
+  getDemandesEnAttInspection,
+  getDemande,
+  validerRapportInspection,
+} = require("../controllers/agents");
 
-// login 
-router.post('/login',login );
-// register inspecteur et instructeur 
+// login
+router.post("/login", login);
 
- router.post('/Admin/register',protect("Administrateur"),registerUser );
+// register inspecteurs et instructeurs
+router.post("/Admin/register", protect("Administrateur"), registerUser);
 
- router.post('/inspection',protect("Inspecteur"),inpection );
+//consulter les demandes en attented
+router.get("/Admin/Commission", protect("Administrateur"), getDemandeEnAttend);
+// designer la date et l'instructeure de commission pour une demande  et changer de l'etat
+router.put("/Admin/Commission", protect("Administrateur"), InsertdateComm);
 
+// get list instructeures
+router.get("/Admin/Commission/listInstructeurs",protect("Administrateur"),getListInsructeur);
 
-//consulter les demande en attente  
-router.get('/Admin/Commission',protect("Administrateur"),getDemandeEnAttend );
-// designer la date de commission pour une demande 
-router.put('/Admin/Commission/:demandeId/:date',protect("Administrateur"),DsignerDateComm);
+//consulter les demande en attente  approver par instruction
+router.get("/Admin/Inspection", protect("Administrateur"), getDemandeApprouver);
+// designer la date et l'inspection et changer la status en attend inspection
+router.put("/Admin/inspection", protect("Administrateur"), InsertdateInspect);
 
 // get list instructeure
-//router.get('/Admin/Commission',protect("Administrateur"),getListInsructeur);
+router.get("/Admin/inspection/listInspecteurs",protect("Administrateur"), getListInnpecteur);
 
-// designer le constructeur pour une demande 
-//router.put('/Admin/Commission/:demandeId/:instructeur',protect("Administrateur"),Dsignerinstructeur);
+//consulter les demandes en attente d'inspection
+router.get(
+  "/Inspection/getDemandes",
+  protect("Inspecteur"),
+  getDemandesEnAttInspection
+);
+//GET a Demande par ID
+router.get("/Inspection/:id", protect("Inspecteur"), getDemande);
+//Valider le Rapport d'inspection
+router.post(
+  "/Inspection/EnregistrerRapport",
+  protect("Inspecteur"),
+  validerRapportInspection
+);
 
-//consulter les demande en attente  approver par instruction 
-router.get('/Admin/Inspection',protect("Administrateur"),getDemandeApprouver );
-// designer la date de inspection pour une demande 
-router.put('/Admin/Inspection/:demandeId/:date',protect("Administrateur"),DsignerDateinspection);
-
-// get list instructeure
-//router.get('/Admin/inspection',protect("Administrateur"),getListInnpecteur);
-
-// designer le constructeur pour une demande 
-//router.put('/Admin/Commission/:demandeId/:inspecteur',protect("Administrateur"),DesignerInnpecteur);
-
-
-
-
-
-// Route pour enregistrer le rapport d'inspection
-//router.put('/inspections/:inspectionId/rapport',protect("Inspecteur"),enregistrerRapportInspection);
-
-// Route pour consulter les alertes liées aux inspections
-///router.get('/alertes', consulterAlertes);
-
-//affecter les dossiers
-//router.get('/affectation-dossiers', affecterDossier);  
-
-//cosultation 
-//router.get('/calendrier-commissions', ProgrammerCommi); 
-
-//gestion calendrier
-//router.get('/gestion-calendrier-inspection', ProgrammerInspect);
-
-// Route pour l'évaluation du plan d'action  
-//router.post('/evaluation-plan-action', EvaluerPlanAction);
 
 module.exports = router;
