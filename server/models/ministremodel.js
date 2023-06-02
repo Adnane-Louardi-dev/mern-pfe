@@ -1,12 +1,26 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 // Définition du schéma du ministère
 const ministereSchema = new mongoose.Schema({
-  nom: {
+  username: { 
+    type: String, 
+    required: true 
+  },
+  password: { 
+    type: String,
+    required: true 
+  },
+  email: {
     type: String,
     required: true,
     unique: true
-  },/*
+  }
+  /*nom: {
+    type: String,
+    required: true,
+    unique: true
+  },
   ListeProduits: [{
     nom: {
       type: String,
@@ -18,7 +32,7 @@ const ministereSchema = new mongoose.Schema({
     dateAutorisation: Date,
     dateExpiration: Date,
     status: String
-  }],*/
+  }],
   produits: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Produit'
@@ -30,7 +44,7 @@ const ministereSchema = new mongoose.Schema({
   rapports: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Rapport'
-  }]
+  }]*/
 });
 
 // Création du modèle du ministère à partir du schéma
