@@ -1,7 +1,15 @@
 const mongoose = require('mongoose');
 
 const rapportSchema = new mongoose.Schema({
-  type: {
+  titre: {
+    type: String,
+    required: true
+  },
+  contenu: {
+    type: String,
+    required: true
+  },
+ type: {
     type: String,
     enum: ['instruction', 'inspection'],
     required: true
@@ -28,15 +36,12 @@ const rapportSchema = new mongoose.Schema({
   },
   valide: {
     type: Boolean,
-    default: false
+    default: null
   },
   ministere: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Ministere'
   }
-
-  // Autres champs 
-
 });
 
 module.exports = mongoose.model('Rapport', rapportSchema);
