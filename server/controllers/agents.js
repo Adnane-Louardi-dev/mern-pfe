@@ -81,6 +81,7 @@ const getDemandeEnAttend = async (req, res) => {
 // le changement d'etat en attent de commission
 const InsertdateComm = async (req, res) => {
   const { demandId, dateComm, instructeur } = req.body;
+  console.log(req.body)
 
   try {
     const demand = await Demande.findById(demandId);
@@ -92,6 +93,7 @@ const InsertdateComm = async (req, res) => {
     demand.dateInsp = null;
     demand.Inspecteur = null;
     demand.statut = "En_attente_commision ";
+    demand.rapport = null 
     await demand.save();
 
     res.json(demand);

@@ -26,7 +26,7 @@ router.post("/Admin/register", protect("Administrateur"), registerUser);
 //consulter les demandes en attented
 router.get("/Admin/Commission", protect("Administrateur"), getDemandeEnAttend);
 // designer la date et l'instructeure de commission pour une demande  et changer de l'etat
-router.put("/Admin/Commission", protect("Administrateur"), InsertdateComm);
+router.put("/Admin/Setcommission", protect("Administrateur"), InsertdateComm);
 
 // get list instructeures
 router.get("/Admin/Commission/listInstructeurs",protect("Administrateur"),getListInsructeur);
