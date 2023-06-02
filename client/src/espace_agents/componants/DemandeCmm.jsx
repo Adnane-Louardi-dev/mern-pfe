@@ -1,30 +1,42 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-
+import { useSelector  , useDispatch} from 'react-redux';
+import {Date_instucteur} from '../features/designer_date/designer_dateSlice'
+import {demandeCom} from '../features/demandes/demandeSlice'
 const DemandeDetails = ({ demande }) => {
   const { list } = useSelector((state) => state.lists);
   
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedOption, setSelectedOption] = useState('');
-
+  const dispatch = useDispatch() 
   const handleDateChange = (e) => {
     setSelectedDate(e.target.value);
   };
-
+const sendData = ()=>{
+  if (demande._id && selectedDate && selectedOption){
+    const data = {
+      demandId :demande._id,
+      dateComm : selectedDate,
+      instructeur : selectedOption,
+    };
+    
+            dispatch(Date_instucteur(data)).then(()=>{
+              dispatch(demandeCom())
+            })
+           
+  }
+}
   const handleOptionChange = (e) => {
     setSelectedOption(e.target.value);
   };
 
   return (
-    <div className="demande-card">
-      <h3 className="demande-type">Type: chien</h3>
-      <p className="demande-description">Description: Anti-inflammatoires pour les chiens</p>
-      <p className="demande-date">Date de Depot: 2023-05-27T19:22:39.574Z</p>
-      <p className="demande-statut">Statut: En_attente</p>
-      <p className="demande-entreprise">Entreprise: 6477523ada1fbc5456eaee13</p>
-      <form onSubmit={demande._id && selectedDate && selectedOption
-    ? console.log(demande._id, selectedDate, selectedOption)
-    : null}>
+    <div >
+      <h3 >Type: {demande.type} </h3>
+      <p >Description: {demande.description} </p>
+      <p >Date de Depot: {demande.dateDepot} </p>
+      <p >Statut: {demande.statut} </p>
+      <p >Entreprise: {demande.entreprise} </p>
+      <div >
         <input type="date" name="dateCommission" onChange={handleDateChange} />
         <select
           disabled={!list.length}
@@ -39,7 +51,8 @@ const DemandeDetails = ({ demande }) => {
             </option>
           ))}
         </select>
-      </form>
+        <button onClick={sendData}>Send</button>
+      </div>
       
     </div>
   );

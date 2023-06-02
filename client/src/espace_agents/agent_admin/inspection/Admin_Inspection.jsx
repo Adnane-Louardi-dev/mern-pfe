@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { reset ,demandeInsp } from '../../features/demandes/demandeSlice'
 import {listInspecteurs} from '../../features/list_Inspecteur_Instructeur/listSlice'
+import DemandeInsp from '../../componants/DemandeInsp'
 
 
 
@@ -32,8 +33,11 @@ const Admin_Inspection = () => {
 
   return (
     <div>
-      show demandes Inspection
-    </div>
+      
+    {demande.map((e)=>[
+      <DemandeInsp key={e._id} demande={e}  />
+    ])}
+  </div>
   )
 }
 
