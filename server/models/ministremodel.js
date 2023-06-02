@@ -5,7 +5,8 @@ const bcrypt = require('bcrypt');
 const ministereSchema = new mongoose.Schema({
   username: { 
     type: String, 
-    required: true 
+    required: true ,
+     require: true, index:true, unique:true, sparse:true
   },
   password: { 
     type: String,
@@ -15,12 +16,12 @@ const ministereSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true
-  }
-  /*nom: {
+  },
+  nom: {
     type: String,
     required: true,
     unique: true
-  },
+  }/*,
   ListeProduits: [{
     nom: {
       type: String,
