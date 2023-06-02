@@ -12,7 +12,7 @@ const jwt = require('jsonwebtoken');
 
 const createMinistere = async (req, res) => {
   try {
-    const { username, password , email} = req.body;
+    const { username, password , email, nom} = req.body;
 
     // Vérifier si le ministère de santé existe déjà
     const existingMinistere = await Ministere.findOne({ username });
@@ -28,6 +28,7 @@ const createMinistere = async (req, res) => {
       username: username,
       password: hashedPassword,
       email: email,
+      nom: nom,
     });
 
     // Enregistrer le ministère de santé dans la base de données
@@ -35,7 +36,10 @@ const createMinistere = async (req, res) => {
 
     res.status(200).json({ message: 'Compte ministère de santé créé avec succès' });
   } catch (err) {
-    res.status(500).json({ error: 'Internal server error' });
+    console.error(err);
+    res.status(500).json({ error: err.message, stack: err.stack });
+    //res.status(500).json({ error: err });
+    //res.status(500).json({ error: 'Internal server error' });
   }
 };
 
@@ -98,7 +102,7 @@ const saisieRemarqueProduit = (req, res) => {
 };
 
 const saisieRemarqueRapports = (req, res) => {
-  const { rapportId, remarque } = req.body;
+  const rapportId = req.params.rapportId;
 
   // Find the rapport in the database using the rapportId
   Rapport.findById(rapportId)
@@ -111,7 +115,7 @@ const saisieRemarqueRapports = (req, res) => {
       const newRemarque = new Remarque({
         type: 'rapport',
         rapport: rapportId,
-        contenu: remarque
+        contenu: 'le rapport est bien défini',
       });
 
       // Save the new remarque in the database
