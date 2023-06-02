@@ -205,7 +205,6 @@ const validerRapportInspection = async (req, res) => {
     //   return res.status(404).json({ error: "Insèrer 1 fichier au minimum" });
     // }
     //console.log(req.user.role);
-
     const rapport = new Rapport({
       type: "inspection", //req.user.role
       agents: new ObjectId(req.user.id), //req.user._id
