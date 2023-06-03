@@ -1,0 +1,48 @@
+.Footer {
+  
+   
+    background-color: white;
+    width: 95%;
+   padding-left: 5%;
+    
+  }
+  
+  .headers {
+   width:85%;
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  padding-left: 15%;
+  }
+  
+  #headV {
+    color: rgb(24, 155, 24);
+    font-size: large;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
+  
+  .lists {
+    
+    display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  
+  margin-left: 3%;
+    
+    
+  }
+  
+  .title {
+   font-size: large;
+    margin-bottom: 10px;
+    color: #1678F2;
+  }
+  
+  .item {
+    margin: 5px 0;
+    font-size: small;
+    color: #4F555A;
+    display: flex;
+  align-items: center;
+    
+  }
+  
+  
