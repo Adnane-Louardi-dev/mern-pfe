@@ -1,0 +1,19 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');
+
+.navbar {
+    background-color:rgb(255, 255, 255);
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 90% 10%;
+}
+
+.logoContainer {
+ width: 15%;
+ padding-top: 15%;
+ margin-left: 50%;
+}
+button {
+    border: none;
+    background-color: white;
+}

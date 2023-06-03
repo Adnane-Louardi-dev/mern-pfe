@@ -28,6 +28,21 @@ async(data,thunkAPI)=>{
     }
 })
 
+// put date d'inspection et inspecteur
+export const Date_inspecteur = createAsyncThunk('/espaceAgent/Admin/Setinspection',
+async(data,thunkAPI)=>{
+    
+    try {
+        console.log(data)
+        const token = thunkAPI.getState().auth.Agentuser.token
+        return await designer_dateService.Date_insp( data,  token)
+        
+    } catch (error) {
+        const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toSting()
+        return thunkAPI.rejectWithValue(message)
+    }
+})
+
 
 export const desinger_dateSlice = createSlice({
     name:'desinger_date',
@@ -52,6 +67,20 @@ export const desinger_dateSlice = createSlice({
             
         })
         .addCase(Date_instucteur.rejected,(state,action)=>{
+            state.isLoading = false 
+            state.isError = true 
+            state.message = action.payload 
+           
+        })
+        .addCase(Date_inspecteur.pending,(state)=>{
+            state.isLoading=true
+        })
+        .addCase(Date_inspecteur.fulfilled, (state,action)=>{
+            state.isLoading = false 
+            state.isSuccess = true 
+            
+        })
+        .addCase(Date_inspecteur.rejected,(state,action)=>{
             state.isLoading = false 
             state.isError = true 
             state.message = action.payload 
