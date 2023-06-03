@@ -120,6 +120,8 @@ const InsertdateInspect = async (req, res) => {
     demand.dateComm = demand.dateComm;
     demand.Instructeur = demand.Instructeur;
     demand.statut = "En_attente_inspection";
+    demand.rapport = null 
+
     await demand.save();
 
     res.json(demand);
