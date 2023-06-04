@@ -3,7 +3,7 @@ import { useState , useEffect } from 'react'
 import {useSelector , useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { registerAgent, reset } from '../../features/auth/authSlice'
-
+import '../../Styles/Register.css'
 
 const Register = () => {
     const [formData , setFormData] = useState({
@@ -26,7 +26,15 @@ useEffect (()=>{
     console.log(message) 
   }
   if(isSuccess  ) {
-    navigate('/espaceAgent/Admin')
+    alert('Success')
+    setFormData(
+      { nom:'',
+      prenom:'',
+      email:'',
+      role:'',
+      password:''}
+    )
+    
   }
   if(isError){
     navigate('/espaceAgent/login')
@@ -55,26 +63,53 @@ const onSubmit = (e)=> {
   dispatch(registerAgent(UserData))
 }
   return (
-    <div>
-      <section>
-        <h1>Register inspecteur&instructeur</h1>
-        <p>create account for ur employees</p>
-      </section>
-      <section>
-        <form onSubmit={onSubmit} >
-            <input type="text" placeholder='enter ur name ' id='nom' name='nom' value={nom} onChange={onChange}  />
-            <input type="text" placeholder='enter ur last name ' id='prenom' name='prenom' value={prenom} onChange={onChange}  />
+   <div className='Register_container'>
+     <div >
+  
+      <div className='header'>Register les  inspecteurs & instructeurs</div>
+      <div className='description'>Créer un compte pour les inspecteurs et les instructeurs </div>
+    
+   
+      <form onSubmit={onSubmit} className='registerForm' >
+        <div className='inputs'  >
+          <label htmlFor="nom" className='lableRegister'>Name</label> <br />
+          <input type="text" id="nom" name="nom" value={nom} onChange={onChange}  className='inp'/>
+        </div>
+        <div className='inputs' >
+          <label htmlFor="prenom" className='lableRegister'>Last Name</label> <br />
+          <input type="text" id="prenom" name="prenom" value={prenom} onChange={onChange}  className='inp' />
+        </div>
+       <div className='inputs'>
+          <label htmlFor="role" className='lableRegister'>Role</label> <br />
+          <div className='selection'>
             <select name="role" id="role" value={role} onChange={onChange}>
-                <option> Select role</option>
-                <option value="Inspecteur">Inspecteur</option>
-                <option value="Instructeur">Instructeur</option> 
+              <option className='op'>Select role</option>
+              <option className='op' value="Inspecteur">Inspector</option>
+              <option  className='op' value="Instructeur">Instructor</option>
             </select>
-            <input type="email" placeholder='enter ur last email ' id='email' name='email' value={email} onChange={onChange}  />
-            <input type="password" placeholder='enter ur last name ' id='password' name='password' value={password} onChange={onChange}  />
-            <button type="submit">Submit</button>
-        </form>
-      </section>
-    </div>
+          </div>
+        </div>
+        <div className='inputs'>
+          <label htmlFor="email" className='lableRegister'>Email</label><br />
+          <input type="email" id="email" name="email" value={email} onChange={onChange} className='inp' />
+        </div>
+        <div  className='inputs'>
+          <label htmlFor="password"  className='lableRegister' >Password</label> <br />
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={password}
+            onChange={onChange}
+            className='inp'
+          />
+        </div>
+        <button type="submit" className='sendI'>Submit</button>
+      </form>
+    
+     </div>
+   </div>
+
   )
 }
 
