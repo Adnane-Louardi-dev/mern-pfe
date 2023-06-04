@@ -1,10 +1,12 @@
 .Footer {
   
-   
+   padding-top: 5%;
     background-color: white;
     width: 95%;
    padding-left: 5%;
-    
+    border-top: 2px rgba(0, 0, 0, 0.315);
+    padding-bottom: 5%;
+   
   }
   
   .headers {

@@ -27,7 +27,9 @@ const AgentAdmin = () => {
      <div style={styles.adminPageContainer}>
      
      <div style={styles.sidebar}>
-     <h1>Welcome admin {Agentuser&&Agentuser.name} </h1><br />
+     <h1>Welcome , {Agentuser&&Agentuser.name} </h1><br />
+
+
       <button  onClick={()=>{setPage(0)}} 
       style={styles.sidebarButton}
       onMouseEnter={(e) => {
@@ -40,7 +42,7 @@ const AgentAdmin = () => {
       }}
     >
       
-      Consulte demande de Commission</button> <br />
+      Consulté demandes en attente de Commission</button> <br />
       <button  onClick={()=>{setPage(1)}}
        style={styles.sidebarButton}
        onMouseEnter={(e) => {
@@ -50,7 +52,7 @@ const AgentAdmin = () => {
        onMouseLeave={(e) => {
          e.target.style.backgroundColor = styles.sidebarButton.backgroundColor;
          e.target.style.color = styles.sidebarButton.color;
-       }}  >Consulte demande d'inpection </button> <br />
+       }}  >Consulté demandes en attente d'inspection </button> <br />
       <button onClick={()=>{setPage(2)}}  style={styles.sidebarButton}
           onMouseEnter={(e) => {
           e.target.style.backgroundColor = styles.sidebarButtonHover.backgroundColor;
@@ -59,7 +61,7 @@ const AgentAdmin = () => {
           onMouseLeave={(e) => {
             e.target.style.backgroundColor = styles.sidebarButton.backgroundColor;
             e.target.style.color = styles.sidebarButton.color;
-          }}>register agent</button> 
+          }}>Register Agents</button> 
      </div>
 
     

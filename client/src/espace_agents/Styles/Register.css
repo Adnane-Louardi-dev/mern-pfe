@@ -1,0 +1,73 @@
+.Register_container {
+    margin-top: 5%;
+    margin-left: 3%;
+}
+
+.header {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: rgba(0, 0, 0, 0.014);
+    padding-top: 3%;
+    padding-bottom: 3%;
+    font-size: 65px;
+
+}
+.description {
+    margin-top: 3%;
+    font-size: x-large;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: rgba(0, 0, 0, 0.582);
+
+}
+
+.registerForm {
+    margin-top: 3%;
+    margin-left: 10%;
+    
+}
+
+.inputs {
+    padding-top: 3%;
+}
+.inp {
+    margin-top: 2%;
+    width: 50%;
+    padding: 1%;
+    border:0;outline:0;
+  border-bottom: 3px solid #888;
+  font-family: "Arial", sans-serif;
+  font-size: 16px;
+ 
+  transition: border-bottom-color 0.3s;
+   
+}
+.inp:hover,
+.inp:focus {
+  border-bottom-color:  #00A3FF;
+}
+#role {
+    width: 50%;
+    background-color: white;
+    border: none;
+    font-size: medium;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin-top: 2%;
+}
+.lableRegister {
+    color: rgba(0, 0, 0, 0.596);
+}
+.sendI {
+    margin-left: 20%;
+    margin-top: 5%;
+    border: 3px solid;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    padding-left: 4%;
+    padding-right: 4%;
+    border-radius: 15px;
+    border-color:  #00A3FF;
+}
+.sendI:hover,
+.sendI:focus {
+  background-color:  #00A3FF;
+  color: white;
+}
