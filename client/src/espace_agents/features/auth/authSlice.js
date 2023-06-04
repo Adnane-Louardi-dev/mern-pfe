@@ -40,8 +40,8 @@ async(user,thunkAPI)=>{
 
 
 
-export const lougout =createAsyncThunk('Admin/logout' , async()=>{
-    await authService.lougout()
+export const logout =createAsyncThunk('Admin/logout' , async()=>{
+    await authService.logout()
 })
 
 export const authSlice = createSlice({
@@ -86,6 +86,11 @@ export const authSlice = createSlice({
             state.message = action.payload 
             state.Agentuser = null
         })
+        .addCase(logout.fulfilled, (state)=>{
+           
+            state.Agentuser = null
+        })
+        
     }
 })
 
