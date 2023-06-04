@@ -84,17 +84,15 @@ const InsertdateComm = async (req, res) => {
   console.log(req.body)
 
   try {
-    const demand = await Demande.findById(demandId);
+   
+   const demand = await Demande.findOneAndUpdate(
+    {_id:demandId},
+    {dateComm,Instructeur:instructeur ,statut:"En_attente_commision"}
+   )
     if (!demand) {
       return res.status(404).json({ message: "Demand not found." });
     }
-    demand.dateComm = dateComm ? new Date(dateComm) : null;
-    demand.Instructeur = instructeur;
-    demand.dateInsp = null;
-    demand.Inspecteur = null;
-    demand.statut = "En_attente_commision ";
-    demand.rapport = null 
-    await demand.save();
+  
 
     res.json(demand);
   } catch (error) {
@@ -111,18 +109,13 @@ const InsertdateInspect = async (req, res) => {
   const { demandId, dateInsp, inspecteur } = req.body;
 
   try {
-    const demand = await Demande.findById(demandId);
+    const demand = await Demande.findOneAndUpdate(
+      {_id:demandId},
+      {dateInsp,Inspecteur:inspecteur ,statut:"En_attente_inspection"}
+     )
     if (!demand) {
       return res.status(404).json({ message: "Demand not found." });
     }
-    demand.dateInsp = dateInsp ? new Date(dateInsp) : null;
-    demand.Inspecteur = inspecteur;
-    demand.dateComm = demand.dateComm;
-    demand.Instructeur = demand.Instructeur;
-    demand.statut = "En_attente_inspection";
-    demand.rapport = null 
-
-    await demand.save();
 
     res.json(demand);
   } catch (error) {
