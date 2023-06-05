@@ -3,6 +3,8 @@ import { useState , useEffect  } from 'react'
 import {useSelector , useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { loginAgent , reset } from '../features/auth/authSlice'
+import Navbar from '../componants/NavBar'
+import Footer from '../componants/Footer'
 
 
 
@@ -59,6 +61,7 @@ dispatch(loginAgent(userData))
 }
 return (
 <div>
+  <Navbar/>
   <section>
     <h1>log in </h1>
     <p>Weclome agent</p>
@@ -70,6 +73,7 @@ return (
         <button type="submit">Submit</button>
     </form>
   </section>
+  
 </div>
 )
 }

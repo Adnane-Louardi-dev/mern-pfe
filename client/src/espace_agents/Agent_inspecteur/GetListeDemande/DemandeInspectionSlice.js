@@ -15,7 +15,7 @@ export const ListDemandes = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.Agentuser.token;
-      return await getDemandes.inspectionLi(token);
+      return await getDemandes(token);
     } catch (error) {
       const message =
         (error.response &&

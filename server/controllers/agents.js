@@ -81,7 +81,7 @@ const getDemandeEnAttend = async (req, res) => {
 // le changement d'etat en attent de commission
 const InsertdateComm = async (req, res) => {
   const { demandId, dateComm, instructeur } = req.body;
-  console.log(req.body)
+ 
 
   try {
    
@@ -106,13 +106,15 @@ const InsertdateComm = async (req, res) => {
 // le changement d'etat en attent d'inspection
 
 const InsertdateInspect = async (req, res) => {
-  const { demandId, dateInsp, inspecteur } = req.body;
-
+  const { demandId, dateInsp, Inspecteur } = req.body;
+console.log(demandId , dateInsp , Inspecteur)
   try {
-    const demand = await Demande.findOneAndUpdate(
-      {_id:demandId},
-      {dateInsp,Inspecteur:inspecteur ,statut:"En_attente_inspection"}
-     )
+    const demand = await Demande.findByIdAndUpdate(
+      demandId,
+      { dateInsp, Inspecteur: Inspecteur, statut: "En_attente_inspection" },
+      { new: true, runValidators: true }
+    );
+
     if (!demand) {
       return res.status(404).json({ message: "Demand not found." });
     }
