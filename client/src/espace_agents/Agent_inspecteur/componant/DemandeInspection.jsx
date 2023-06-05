@@ -6,7 +6,7 @@ const demandeInspection = ({demande}) => {
       <p> {demande.id} </p>
       <p> {demande.description} </p>
       <p> {demande.statut} </p>
-      <p> {demande.dateInsp} </p>
+      <p> {demande.dateInsp} </p>  
       <p></p>
     </div>
   )
