@@ -29,7 +29,6 @@ const DemandeList = () => {
     }
   };*/
 
-const AgentInstruction = () => {
   return (
     <div>
       <h1>Demande List</h1>
@@ -46,4 +45,3 @@ const AgentInstruction = () => {
 };
 export default DemandeList;
 
-export default AgentInstruction
