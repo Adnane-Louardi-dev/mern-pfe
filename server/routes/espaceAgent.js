@@ -15,6 +15,9 @@ const {
   getDemandesEnAttInspection,
   getDemande,
   validerRapportInspection,
+  getDemandeEnAttendComission ,
+  setDemandeApprouvé ,
+  setDemandeRejetée ,
 } = require("../controllers/agents");
 
 // login
@@ -38,6 +41,14 @@ router.put("/Admin/Setinspection", protect("Administrateur"), InsertdateInspect)
 
 // get list instructeure
 router.get("/Admin/inspection/listInspecteurs",protect("Administrateur"), getListInnpecteur);
+
+//get demande En_attente_commision
+router.get('/Instruction',protect("Instructeur"),getDemandeEnAttendComission);
+
+//change demande approuve;
+router.put('/Instruction/apv/:demandeId',protect("Instructeur"),setDemandeApprouvé);
+//change demande rejetee;
+router.put('/Instruction/rjt/:demandeId',protect("Instructeur"),setDemandeRejetée);
 
 //consulter les demandes en attente d'inspection
 router.get(
