@@ -257,7 +257,7 @@ const setDemandeRejetée =  async (req, res) => {
     const { demandeId } = req.params;
 
     // Update the status of the "demande" object to "apv"
-    await Demande.findByIdAndUpdate(demandeId, { status: 'Rejetée' });
+    await Demande.findByIdAndUpdate(demandeId, { statut: 'Rejetée' });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Server error' });
