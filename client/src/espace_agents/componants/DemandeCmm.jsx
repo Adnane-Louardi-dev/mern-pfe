@@ -28,7 +28,6 @@ const sendData = ()=>{
   const handleOptionChange = (e) => {
     setSelectedOption(e.target.value);
   };
-
   return (
     <div >
       <h3 >Type: {demande.type} </h3>
@@ -36,7 +35,6 @@ const sendData = ()=>{
       <p >Date de Depot: {demande.dateDepot} </p>
       <p >Statut: {demande.statut} </p>
       <p >Entreprise: {demande.entreprise} </p>
-      
       <div >
         <input type="date" name="dateCommission" onChange={handleDateChange} />
         <select
