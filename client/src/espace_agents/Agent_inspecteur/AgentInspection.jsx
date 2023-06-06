@@ -22,5 +22,5 @@ const AgentInspection = () => {
     </div>
   );
 };
-
+console.log();
 export default AgentInspection;
