@@ -1,14 +1,16 @@
 import React from 'react'
 
-const demandeInspection = ({demande}) => {
+const demandeInspection = ({demande , setid}) => {
   return (
-    <div>
-      <p> {demande.id} </p>
-      <p> {demande.description} </p>
-      <p> {demande.statut} </p>
-      <p> {demande.dateInsp} </p>  
-      <p></p>
-    </div>
+   <div>
+       <div>
+          <p> {demande.description} </p>
+          <p> {demande.statut} </p>
+          <p> {demande.dateInsp} </p>  
+          <button onClick={()=>{setid(demande._id)}}>ajouter rapport </button>
+      </div>
+      
+   </div>
   )
 }
 

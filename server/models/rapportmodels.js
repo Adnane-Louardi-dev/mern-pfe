@@ -7,7 +7,7 @@ const rapportSchema = new mongoose.Schema({
   },
   contenu: {
     type: String,
-    required: true
+    
   },
  type: {
     type: String,
