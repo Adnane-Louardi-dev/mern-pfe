@@ -12,6 +12,7 @@ const Navbar = () => {
     dispatch(reset)
     navigate('/espaceAgent/login')
   }
+ 
   return (
     <div>
         <div className='navbar'>
@@ -19,7 +20,7 @@ const Navbar = () => {
            <img src={require('../imgs/logo_onssa.jpg')} width="150px" />
         </div>
         <div className='logoContainer'>
-        <button className="fas fa-sign-out-alt" onClick={onlogout}> logout </button>
+       {Agentuser ?  <button className="fas fa-sign-out-alt" onClick={onlogout}> logout </button> : ''}
         </div>
    </div>
         

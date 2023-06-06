@@ -6,6 +6,7 @@ import { resetDemandes, demandeInsp } from '../../features/demandes/demandeSlice
 import {listInspecteurs} from '../../features/list_Inspecteur_Instructeur/listSlice'
 import DemandeInsp from '../../componants/DemandeInsp'
 import {resetList} from '../../features/list_Inspecteur_Instructeur/listSlice'
+import '../../Styles/DemandeCard.css'
 
 
 
@@ -36,12 +37,15 @@ const Admin_Inspection = () => {
 
 
   return (
-    <div>
-      
-    {demande.map((e)=>[
-      <DemandeInsp key={e._id} demande={e}  />
-    ])}
-  </div>
+   <div>
+        <div className='headers2'>List des demandes en attente d'inspection</div>
+        <div className='demande'>
+          
+        {demande.map((e)=>[
+          <DemandeInsp key={e._id} demande={e}  />
+        ])}
+      </div>
+   </div>
   )
 }
 

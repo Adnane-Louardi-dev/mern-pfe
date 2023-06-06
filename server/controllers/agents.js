@@ -81,7 +81,7 @@ const getDemandeEnAttend = async (req, res) => {
 // le changement d'etat en attent de commission
 const InsertdateComm = async (req, res) => {
   const { demandId, dateComm, instructeur } = req.body;
- 
+ console.log(demandId, dateComm, instructeur)
 
   try {
    
@@ -208,9 +208,12 @@ const validerRapportInspection = async (req, res) => {
       type: "inspection", //req.user.role
       agents: new ObjectId(req.user.id), //req.user._id
       rapport: req.body.description,
+      titre:req.body.titre
     });
+    
     await rapport.save();
     await Demande.findByIdAndUpdate(
+      
       { _id: req.body.demandeId }, //"647268a4f3736f875b0186fc"
       {
         statut: "inspecte",
@@ -218,7 +221,9 @@ const validerRapportInspection = async (req, res) => {
       }
     );
     res.json({ message: "avec succès" });
+   
   } catch (error) {
+    console.log(error)
     res.status(500).json({ error: "problème de la récupération" });
   }
 };
