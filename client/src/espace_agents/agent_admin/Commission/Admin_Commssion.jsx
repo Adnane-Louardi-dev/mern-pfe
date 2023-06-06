@@ -30,7 +30,7 @@ const Admin_Commssion = () => {
       dispatch( resetList())
 
     }
-  },[Agentuser , navigate , isError ,message , dispatch ])
+  },[Agentuser , navigate ,isError,message , dispatch ])
   return (
     <div>
               <div className='headers2'>List des demandes en attente de commission</div>
