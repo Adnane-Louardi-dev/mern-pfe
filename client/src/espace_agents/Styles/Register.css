@@ -1,5 +1,5 @@
 .Register_container {
-    margin-top: 5%;
+    margin-top: 3%;
     margin-left: 3%;
 }
 
@@ -8,11 +8,11 @@
     background-color: rgba(0, 0, 0, 0.014);
     padding-top: 3%;
     padding-bottom: 3%;
-    font-size: 65px;
+    font-size: 55px;
 
 }
 .description {
-    margin-top: 3%;
+    margin-top: 1%;
     font-size: x-large;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     color: rgba(0, 0, 0, 0.582);
@@ -20,7 +20,7 @@
 }
 
 .registerForm {
-    margin-top: 3%;
+    margin-top: 1%;
     margin-left: 10%;
     
 }
@@ -29,7 +29,7 @@
     padding-top: 3%;
 }
 .inp {
-    margin-top: 2%;
+  
     width: 50%;
     padding: 1%;
     border:0;outline:0;
@@ -57,7 +57,7 @@
 }
 .sendI {
     margin-left: 20%;
-    margin-top: 5%;
+    margin-top: 3%;
     border: 3px solid;
     padding-top: 1%;
     padding-bottom: 1%;
