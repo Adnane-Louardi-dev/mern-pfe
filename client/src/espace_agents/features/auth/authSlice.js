@@ -40,8 +40,8 @@ async(user,thunkAPI)=>{
 
 
 
-export const lougout =createAsyncThunk('Admin/logout' , async()=>{
-    await authService.lougout()
+export const logout =createAsyncThunk('Admin/logout' , async()=>{
+    await authService.logout()
 })
 
 export const authSlice = createSlice({
@@ -63,7 +63,6 @@ export const authSlice = createSlice({
         .addCase(registerAgent.fulfilled, (state,action)=>{
             state.isLoading = false 
             state.isSuccess = true 
-            state.Agentuser = action.payload
         })
         .addCase(registerAgent.rejected,(state,action)=>{
             state.isLoading = false 
@@ -87,6 +86,11 @@ export const authSlice = createSlice({
             state.message = action.payload 
             state.Agentuser = null
         })
+        .addCase(logout.fulfilled, (state)=>{
+           
+            state.Agentuser = null
+        })
+        
     }
 })
 

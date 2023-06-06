@@ -10,6 +10,7 @@ const getDemandes = async (token) => {
     "/espaceAgent/Inspection/getDemandes",
     config
   );
+  console.log(response.data)
   return response.data;
 };
 

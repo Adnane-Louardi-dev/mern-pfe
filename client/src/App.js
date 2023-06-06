@@ -8,7 +8,7 @@ import AgentInstruction from "./espace_agents/agent_instructeur/AgentInstruction
 import NotFound from "./NotFound";
 import Register from "./espace_agents/agent_admin/register/Register";
 import Admin_Commssion from "./espace_agents/agent_admin/Commission/Admin_Commssion";
-import Admin_Inspection from "./espace_agents/agent_admin/instruction/Admin_Inspection";
+import Admin_Inspection from "./espace_agents/agent_admin/inspection/Admin_Inspection";
 
 const App = () => {
   return (
