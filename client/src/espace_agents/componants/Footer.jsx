@@ -4,10 +4,9 @@ const Footer = () => {
   return (
     <div>
        <div className='Footer'>
-
-            <div className='headers'>
-                  <div id='headV'>Médicaments et intrants <br /> vétérinaires</div>
+            <div className='headers' style={{display:"flex",justifyContent:"space-between"}}>
                   <div className='onsa'> <img src={require('../imgs/logo_onssa.jpg')} width="100px"/></div>
+                  <div id='headV'>Médicaments et intrants <br /> vétérinaires</div>
                   <div className='ministre'>  <img src={require('../imgs/minister.png')}width="100px" /> </div>
             </div>
             <div className='lists'>
