@@ -230,11 +230,12 @@ const validerRapportInspection = async (req, res) => {
 const getDemandeEnAttendComission = async (req, res) => {
   try {
     // Find the "demande" objects with status "enattende"
-    /*const currentUserId = req.query.user_id;*/
-    const demandes = await Demande.find({ statut: 'En_attente_commision' /*, Instructeur : currentUserId */});
+    
+    const demandes = await Demande.find({ statut: 'En_attente_commision' });
 
     res.json(demandes);
-    console.log(demandes);
+    
+    
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Server error' });
@@ -290,6 +291,7 @@ module.exports = {
   getDemande,
   validerRapportInspection,
   getDemandeEnAttendComission ,
-   setDemandeApprouvé ,
-   setDemandeRejetée ,
+  setDemandeApprouvé ,
+  setDemandeRejetée ,
+  setDemandeIncomplete ,
 };

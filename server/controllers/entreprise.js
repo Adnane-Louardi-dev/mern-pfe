@@ -13,6 +13,7 @@ const getDemandes = async (req, res) => {
   Demande.find({ /*Entreprise_id*/ }).sort({createAt: -1}).populate('produit').then((Demande)=>res.json(Demande)).catch((err)=>res.json(err));
 }
 
+// 
 // Récupérer une demande par son ID
 const getDemande = async (req, res) => {
   Demande.findById(req.params.id).populate('produit').then((Demande)=>res.json(Demande)).catch((err)=>res.json(err))
