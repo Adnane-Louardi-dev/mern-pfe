@@ -6,6 +6,7 @@ import { resetDemandes ,demandeCom } from '../../features/demandes/demandeSlice'
 import {resetList} from '../../features/list_Inspecteur_Instructeur/listSlice'
 import {listInstructeurs} from '../../features/list_Inspecteur_Instructeur/listSlice'
 import DemandeCmm from '../../componants/DemandeCmm'
+import '../../Styles/DemandeCard.css'
 const Admin_Commssion = () => {
 
   const navigate = useNavigate()
@@ -29,13 +30,16 @@ const Admin_Commssion = () => {
       dispatch( resetList())
 
     }
-  },[Agentuser , navigate , isError ,message , dispatch ])
+  },[Agentuser , navigate ,isError,message , dispatch ])
   return (
     <div>
-      
-      {demande.map((e)=>[
-        <DemandeCmm key={e._id} demande={e}  />
-      ])}
+              <div className='headers2'>List des demandes en attente de commission</div>
+
+        <div  className='demande'>
+          {demande.map((e)=>[
+            <DemandeCmm key={e._id} demande={e}  />
+          ])}
+        </div>
     </div>
   )
 }

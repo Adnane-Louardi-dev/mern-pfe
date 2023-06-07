@@ -1,23 +1,22 @@
-const Remarque = require('../models/remarquemodels');
-const Rapport = require('../models/rapportmodels');
-const Produit= require('../models/produitmodel');
-const Ministere = require('../models/ministremodel'); 
+const Remarque = require("../models/remarquemodels");
+const Rapport = require("../models/rapportmodels");
+const Produit = require("../models/produitmodel");
+const Ministere = require("../models/ministremodel");
 
-const fs = require('fs');
-const path = require('path');
-const { v4: uuidv4 } = require('uuid');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-
+const fs = require("fs");
+const path = require("path");
+const { v4: uuidv4 } = require("uuid");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const createMinistere = async (req, res) => {
   try {
-    const { username, password , email, nom} = req.body;
+    const { username, password, email, nom } = req.body;
 
     // Vérifier si le ministère de santé existe déjà
     const existingMinistere = await Ministere.findOne({ username });
     if (existingMinistere) {
-      return res.status(400).json({ error: 'Ministère de santé already exists' });
+      return res.status(400).json({ error: "Ministère de santé already exists" });
     }
 
     // Hasher le mot de passe
@@ -34,7 +33,7 @@ const createMinistere = async (req, res) => {
     // Enregistrer le ministère de santé dans la base de données
     await ministere.save();
 
-    res.status(200).json({ message: 'Compte ministère de santé créé avec succès' });
+    res.status(200).json({ message: "Compte ministère de santé créé avec succès" });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: err.message, stack: err.stack });
@@ -50,25 +49,24 @@ const login = async (req, res) => {
     // Rechercher le ministère de santé dans la base de données
     const ministere = await Ministere.findOne({ username });
     if (!ministere) {
-      return res.status(401).json({ error: 'Authentication failed' });
+      return res.status(401).json({ error: "Authentication failed" });
     }
 
     // Vérifier le mot de passe
     const isPasswordValid = await bcrypt.compare(password, ministere.password);
     if (!isPasswordValid) {
-      return res.status(401).json({ error: 'Authentication failed' });
+      return res.status(401).json({ error: "Authentication failed" });
     }
 
     // Générer le jeton d'accès JWT
-    const token = jwt.sign({ userId: ministere._id }, 'secret_key');
+    const token = jwt.sign({ userId: ministere._id }, "secret_key");
 
     // Répondre avec le jeton d'accès
     res.status(200).json({ token });
   } catch (err) {
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ error: "Internal server error" });
   }
 };
-
 
 const saisieRemarqueProduit = (req, res) => {
   const { produitId, remarque } = req.body;
@@ -103,59 +101,55 @@ const saisieRemarqueProduit = (req, res) => {
     });
 };
 
-const saisieRemarqueRapports = (req, res) => {
-  const rapportId = req.params.rapportId;
+const saisieRemarqueRapports = async (req, res) => {
+  try {
+    const rapportId = req.query.rapportId;
+    const remarqueContenu = req.body.contenu;
+
+    // Save the new remarque in the database
+    const newRemarque = await Remarque.create({
+      type: "rapport",
+      rapport: rapportId,
+      contenu: remarqueContenu,
+    });
+
+    // find the rapport by the ID provided by req.query and push the new remarque to the remarques Array in DB
+    let updatedRapport = await Rapport.findOneAndUpdate({ _id: rapportId }, { $push: { remarques: newRemarque } }, { returnDocument: "after" });
+    res.json({ updatedRapport });
+  } catch (err) {
+    res.json({ err });
+  }
 
   // Find the rapport in the database using the rapportId
-  Rapport.findById(rapportId)
-    .then(rapport => {
-      if (!rapport) {
-        return res.status(404).json({ error: "Rapport not found" });
-      }
+  // Rapport.find({ _id: rapportId })
+  //   .then((rapport) => {
 
-      // Create a new remarque object using the provided data
-      const newRemarque = new Remarque({
-        type: 'rapport',
-        rapport: rapportId,
-        contenu: 'le rapport est bien défini',
+  //     const Rapport = new Rapport({ ...rapport, remarques: [...rapport.remarques, newRemarque] });
+  //     Rapport.save();
+  //     console.log(Rapport);
 
-      });
-
-      // Save the new remarque in the database
-      return newRemarque.save();
-    })
-    .then(savedRemarque => {
-      // Add the saved remarque to the rapport's list of remarques
-      rapport.remarques.push(savedRemarque._id);
-      return rapport.save();
-    })
-    .then(() => {
-      // Return a success response
-      res.status(200).json({ message: "Remarque sur le rapport enregistrée avec succès." });
-    })
-    .catch(err => {
-      // Handle any errors that occur
-      res.status(500).json({ error: "Internal server error" });
-    });
+  //     res.status(200).json({ message: "Remarque sur le rapport enregistrée avec succès." });
+  //   })
+  //   .catch((err) => {
+  //     res.json({ error: err });
+  //   });
 };
-
 
 const consulterRapports = (req, res) => {
   // Logique pour la consultation des rapports
 
   // Query the database to retrieve the list of rapports
   Rapport.find({})
-    .then(rapports => {
+    .then((rapports) => {
       // Return a success response with the list of rapports
       res.status(200).json({ rapports });
     })
-    .catch(error => {
+    .catch((error) => {
       // Handle any errors that occur during the database query
-      console.error('Erreur lors de la récupération des rapports:', error);
+      console.error("Erreur lors de la récupération des rapports:", error);
       res.status(500).json({ error: "Internal server error" });
     });
 };
-
 
 // Logique pour la validation du rapport d'instruction
 const validerRapports = (req, res) => {
@@ -164,7 +158,7 @@ const validerRapports = (req, res) => {
 
   // Find the rapport by ID
   Rapport.findById(rapportId)
-    .then(rapport => {
+    .then((rapport) => {
       if (rapport) {
         if (action === "validate") {
           // Update the validation status of the rapport
@@ -185,7 +179,7 @@ const validerRapports = (req, res) => {
       // Return a success response
       res.status(200).json({ message: "Rapport traité avec succès." });
     })
-    .catch(err => {
+    .catch((err) => {
       // Handle any errors that occur during the database query or save operation
       res.status(500).json({ error: "Internal server error" });
     });
@@ -223,13 +217,12 @@ const ajouterProduit = (req, res) => {
       res.status(500).json({ error: error.message });
     });
 };
-  module.exports = {
-    createMinistere,
-    login,
-    saisieRemarqueProduit,
-    saisieRemarqueRapports,
-    consulterRapports,
-    validerRapports,
-    ajouterProduit
-  };
-  
+module.exports = {
+  createMinistere,
+  login,
+  saisieRemarqueProduit,
+  saisieRemarqueRapports,
+  consulterRapports,
+  validerRapports,
+  ajouterProduit,
+};

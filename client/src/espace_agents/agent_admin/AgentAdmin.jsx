@@ -18,7 +18,7 @@ const AgentAdmin = () => {
       if(!Agentuser) {
         navigate('/espaceAgent/login')
       }
-    })
+    },[])
   
 
   return (
@@ -27,7 +27,7 @@ const AgentAdmin = () => {
      <div style={styles.adminPageContainer}>
      
      <div style={styles.sidebar}>
-     <h1>Welcome , {Agentuser&&Agentuser.name} </h1><br />
+     <h1>Welcome, {Agentuser&&Agentuser.name} </h1><br />
 
 
       <button  onClick={()=>{setPage(0)}} 
@@ -53,7 +53,7 @@ const AgentAdmin = () => {
          e.target.style.backgroundColor = styles.sidebarButton.backgroundColor;
          e.target.style.color = styles.sidebarButton.color;
        }}  >Consulté demandes en attente d'inspection </button> <br />
-      <button onClick={()=>{setPage(2)}}  style={styles.sidebarButton}
+      <button onClick={()=>{setPage(2)}}  style={styles.sidebarButton} 
           onMouseEnter={(e) => {
           e.target.style.backgroundColor = styles.sidebarButtonHover.backgroundColor;
           e.target.style.color = styles.sidebarButtonHover.color;
