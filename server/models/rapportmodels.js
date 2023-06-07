@@ -3,13 +3,12 @@ const mongoose = require("mongoose");
 const rapportSchema = new mongoose.Schema({
   titre: {
     type: String,
-    required: true
+    required: true,
   },
   contenu: {
     type: String,
-    
   },
- type: {
+  type: {
     type: String,
     enum: ["instruction", "inspection"],
     required: true,
@@ -29,17 +28,17 @@ const rapportSchema = new mongoose.Schema({
   },
   //remarques faites par le ministère de santé
   remarques: {
-    type: [String],
+    type: Array,
     default: [],
   },
   valide: {
     type: Boolean,
-    default: null
+    default: null,
   },
   ministere: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Ministere'
-  }
+    ref: "Ministere",
+  },
 });
 
 module.exports = mongoose.model("Rapport", rapportSchema);
