@@ -127,6 +127,7 @@ const Demands = () => {
               >
                 Rejter
               </button>
+              //
               <button
                 onClick={() => {
                   if (new Date(demand.dateComm) < new Date()) {
