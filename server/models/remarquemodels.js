@@ -1,24 +1,23 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const remarqueSchema = new mongoose.Schema({
   type: {
     type: String,
-    enum: ['produit', 'rapport'],
-    required: true
+    enum: ["produit", "rapport"],
+    required: true,
   },
-  produit:{
+  produit: {
     type: String,
-    required: true
   },
   contenu: {
     type: String,
-    required: true
+    required: true,
   },
   date: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
 });
-const Remarque = mongoose.model('Remarque', remarqueSchema);
+const Remarque = mongoose.model("Remarque", remarqueSchema);
 
-module.exports = mongoose.model('Remarque', remarqueSchema);
+module.exports = mongoose.model("Remarque", remarqueSchema);

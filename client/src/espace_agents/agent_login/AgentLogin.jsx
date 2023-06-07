@@ -62,18 +62,35 @@ dispatch(loginAgent(userData))
 return (
 <div>
   <Navbar/>
-  <section>
-    <h1>log in </h1>
-    <p>Weclome agent</p>
+  <section style={{
+    display:'grid',
+    justifyContent:'center',
+    textAlign:"center"
+  }}>
+    <h1>login</h1>
+    <p>Welcome to agent space</p>
   </section>
-  <section>
-    <form onSubmit={onSubmit} >
-        <input type="email" placeholder='enter ur last email ' id='email' name='email' value={email} onChange={onChange}  />
-        <input type="password" placeholder='enter password' id='password' name='password' value={password} onChange={onChange}  />
-        <button type="submit">Submit</button>
+  <section style={{
+    display:'grid',
+    justifyContent:'center'
+  }}>
+    <form onSubmit={onSubmit} style={{
+      display:'grid',
+      gridColumn:"1",
+      gap:"1rem",
+      backgroundColor:"rgb(0, 163, 255)",
+      padding:"3rem",
+      borderRadius:"20px"
+    }}>
+        <input style={{padding:"8px",border:"none",borderRadius:"5px"}} type="email" placeholder='enter ur last email ' id='email' name='email' value={email} onChange={onChange}  />
+        <input style={{padding:"8px",border:"none",borderRadius:"5px"}} type="password" placeholder='enter password' id='password' name='password' value={password} onChange={onChange}  />
+        <button style={{padding:"8px",border:"none",borderRadius:"5px",color:"rgb(0, 163, 255)"}} type="submit">Login</button>
     </form>
   </section>
-  
+  <section style={{marginTop:"5rem"}}>
+
+  <Footer/>
+  </section>
 </div>
 )
 }
