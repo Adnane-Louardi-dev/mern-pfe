@@ -103,18 +103,18 @@ const saisieRemarqueProduit = (req, res) => {
 
 const saisieRemarqueRapports = async (req, res) => {
   try {
-    const rapportId = await req.params.rapportId;
-    // const remarqueContenu = req.body;
+    const rapportId = req.query.rapportId;
+    const remarqueContenu = req.body.contenu;
 
     // Save the new remarque in the database
     const newRemarque = await Remarque.create({
       type: "rapport",
       rapport: rapportId,
-      contenu: "adnane 1",
+      contenu: remarqueContenu,
     });
 
-    // find the rapport by the ID provided by req.params and push the new remarque to the remarques Array in DB
-    let updatedRapport = await Rapport.findOneAndUpdate({ _id: rapportId }, { $push: { remarques: newRemarque } }, { new: true, upsert: true });
+    // find the rapport by the ID provided by req.query and push the new remarque to the remarques Array in DB
+    let updatedRapport = await Rapport.findOneAndUpdate({ _id: rapportId }, { $push: { remarques: newRemarque } }, { returnDocument: "after" });
     res.json({ updatedRapport });
   } catch (err) {
     res.json({ err });
