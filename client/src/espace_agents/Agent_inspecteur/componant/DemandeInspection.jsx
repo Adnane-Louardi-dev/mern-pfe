@@ -1,17 +1,38 @@
-import React from 'react'
-
-const demandeInspection = ({demande , setid}) => {
+import React from "react";
+import "../DemandeCss.css";
+const demandeInspection = ({ demande, setid }) => {
   return (
-   <div>
-       <div>
-          <p> {demande.description} </p>
-          <p> {demande.statut} </p>
-          <p> {demande.dateInsp} </p>  
-          <button onClick={()=>{setid(demande._id)}}>ajouter rapport </button>
-      </div>
-      
-   </div>
-  )
-}
+    <div className="table_responsive">
+      <table>
+        <thead>
+          <th>Nom du Produit</th>
+          <th>Entreprise</th>
+          <th>Description</th>
+          <th>Statut</th>
+          <th>Date d'inspection</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{demande.produit.nom}</td>
+            <td>{demande.entreprise.nom}</td>
+            <td>{demande.description}</td>
+            <td>En Attente d'inspection </td>
+            <td>{demande.dateInsp}</td>
+            <td>
+              <button
+                className="action_btn"
+                onClick={() => {
+                  setid(demande._id);
+                }}
+              >
+                ajouter rapport{" "}
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  );
+};
 
-export default demandeInspection
+export default demandeInspection;
