@@ -86,10 +86,10 @@ const Demands = () => {
             </div>
             <div style={{ marginLeft: 'auto' }}>
               <button
-                onClick={() => {
-                  if (new Date(demand.dateComm) < new Date()) {
-                    handleStatusUpdateapv(demand._id);
-                  }
+                onClick={() => {  if (new Date(demand.dateComm) < new Date()) {
+                  handleStatusUpdateapv(demand._id);
+                }
+  
                 }}
                 style={{
                   backgroundColor: 'green',
@@ -102,7 +102,7 @@ const Demands = () => {
                   fontWeight: 'bold',
                   marginRight: '10px', // Add margin between the buttons
                 }}
-                disabled={new Date(demand.dateComm) <= new Date()}
+                
               >
                 Approver
               </button>
@@ -123,7 +123,7 @@ const Demands = () => {
                   fontWeight: 'bold',
                   marginRight: '10px', // Add margin between the buttons
                 }}
-                disabled={new Date(demand.dateComm) <= new Date()}
+               
               >
                 Rejter
               </button>
@@ -144,7 +144,7 @@ const Demands = () => {
                   fontSize: '16px',
                   fontWeight: 'bold',
                 }}
-                disabled={new Date(demand.dateComm) <= new Date()}
+            
               >
                 Incomplete
               </button>
