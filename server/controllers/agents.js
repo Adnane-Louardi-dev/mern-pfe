@@ -226,6 +226,56 @@ const validerRapportInspection = async (req, res) => {
     res.status(500).json({ error: "problème de la récupération" });
   }
 };
+const getDemandeEnAttendComission = async (req, res) => {
+  try {
+    // Find the "demande" objects with status "enattende"
+    
+    const demandes = await Demande.find({ statut: 'En_attente_commision' });
+
+    res.json(demandes);
+    
+    
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
+const setDemandeApprouvé =  async (req, res) => {
+  try {
+    const { demandeId } = req.params;
+
+    // Update the status of the "demande" object to "apv"
+    await Demande.findByIdAndUpdate(demandeId, { statut: 'Approuvée' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+const setDemandeRejetée =  async (req, res) => {
+  try {
+    const { demandeId } = req.params;
+
+    // Update the status of the "demande" object to "apv"
+    await Demande.findByIdAndUpdate(demandeId, { statut: 'Rejetée' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
+const setDemandeIncomplete =  async (req, res) => {
+  try {
+    const { demandeId } = req.params;
+
+    // Update the status of the "demande" object to "apv"
+    await Demande.findByIdAndUpdate(demandeId, { statut: 'non_complet' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
 
 module.exports = {
   getDemandeEnAttend,
@@ -239,4 +289,8 @@ module.exports = {
   getDemandesEnAttInspection,
   getDemande,
   validerRapportInspection,
+  getDemandeEnAttendComission ,
+  setDemandeApprouvé ,
+  setDemandeRejetée ,
+  setDemandeIncomplete ,
 };
